@@ -54,20 +54,20 @@
 
 input[type=text]{
     @extend .form-control;
-    margin-top: 10px;
   }
 
 input[type=password]{
     @extend .form-control;
-    margin-top: 10px;
 }
 
 select{
     @extend .form-control;
-    margin-top: 10px;
 }
 
 textarea{
     @extend .form-control;
+}
+
+.field{
     margin-top: 10px;
 }
