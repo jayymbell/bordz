@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'dashboards/show'
+
   get 'sessions/new'
 
   get 'sessions/create'
