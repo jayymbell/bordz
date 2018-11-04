@@ -14,3 +14,36 @@
 
  @import "bootstrap";
  @import "font-awesome";
+
+ .caret-off::before {
+    display: none;
+}
+.caret-off::after {
+    display: none;
+}
+
+.ml-auto .dropdown-menu {
+    left: auto !important;
+    right: 0px;
+}
+
+#sidebar{
+    display: none;
+    float: left; 
+    width: 200px; 
+    height: 100vh; 
+    background-color: #f8f9fa;
+    margin-right: 10px;
+}
+
+.sidebar-nav{
+    border-radius: 0px;
+}
+
+.sidebar-icon{
+    margin-right: 10px;
+}
+
+.sidebar-link{
+    text-decoration: none !important;
+}

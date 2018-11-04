@@ -15,3 +15,10 @@
 //= require popper
 //= require bootstrap-sprockets
 //= require_tree .
+
+$( document ).ready(function() {
+    $( "#sidebar-btn" ).click(function() {
+        console.log("hi");
+        $( "#sidebar" ).toggle();
+      });
+});
