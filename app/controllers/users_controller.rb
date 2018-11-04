@@ -35,8 +35,7 @@ class UsersController < ApplicationController
         format.js {render :js => "window.location.href='#{root_path}'"} 
         
       else
-        puts @user.errors.inspect
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        format.js {render 'new'} 
       end
     end
   end
