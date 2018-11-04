@@ -18,7 +18,6 @@
 
 $( document ).ready(function() {
     $( "#sidebar-btn" ).click(function() {
-        console.log("hi");
         $( "#sidebar" ).toggle();
       });
 });
