@@ -20,4 +20,9 @@ $( document ).ready(function() {
     $( "#sidebar-btn" ).click(function() {
         $( "#sidebar" ).toggle();
       });
+
+    $(".notification").delay(3000).slideUp(200, function() {
+        $(this).alert('close');
+    });
+
 });
