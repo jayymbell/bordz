@@ -1,0 +1,17 @@
+<div class="row">
+    <div class="col-sm-4 offset-sm-4">
+        <div class="card reset-card">
+            <div class="card-header">
+                Password Reset
+            </div>
+            <div class="card-body">
+                <%= form_for(:password_reset, url: password_resets_path) do |f| %>
+                    <%= f.label :email %>
+                    <%= f.email_field :email, class: 'form-control' %>
+
+                   <%= f.submit 'Submit', class: 'btn btn-outline-primary form-control', style: 'margin-top: 20px;' %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>
