@@ -66,3 +66,4 @@ gem 'bootstrap', '~> 4.1.3'
 gem "font-awesome-rails"
 
 gem "figaro"
+

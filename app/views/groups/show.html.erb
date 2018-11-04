@@ -9,7 +9,7 @@
 <div class="row">
   <div class="col-sm-12">
     <div class="field">
-      <strong>Name:</strong>
+      <strong>Name</strong>
       <br/>
       <%= @group.name %>
     </div>
@@ -19,9 +19,26 @@
 <div class="row">
   <div class="col-sm-12">
     <div class="field">
-      <strong>Description:</strong>
+      <strong>Description</strong>
       <br>
       <%= @group.description %>
     </div>
   </div>
 </div>
+
+<div class="row" style="margin-top: 20px;">
+  <div class="col-sm-12">
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link active" id="users-tab" data-toggle="tab" href="#users" role="tab" aria-controls="users" aria-selected="true">Members</a>
+      </li>
+    </ul>
+
+    <div class="tab-content">
+      <div class="tab-pane active" id="users" role="tabpanel" aria-labelledby="users-tab">
+        <%= render 'users'%>
+      </div>
+    </div>
+  </div>
+</div>
+
