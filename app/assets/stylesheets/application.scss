@@ -47,3 +47,27 @@
 .sidebar-link{
     text-decoration: none !important;
 }
+
+.login-card{
+    margin-top: 50px;
+}
+
+input[type=text]{
+    @extend .form-control;
+    margin-top: 10px;
+  }
+
+input[type=password]{
+    @extend .form-control;
+    margin-top: 10px;
+}
+
+select{
+    @extend .form-control;
+    margin-top: 10px;
+}
+
+textarea{
+    @extend .form-control;
+    margin-top: 10px;
+}
