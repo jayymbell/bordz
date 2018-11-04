@@ -28,7 +28,8 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        flash[:success] = "Check your email for a link to activation user account."
+        UserMailer.account_activation(@user).deliver_now
+        flash[:success] = "Check your email for a link to activate your account."
         format.html { redirect_to users_path }
         format.json { render :show, status: :created, location: @user }
         format.js {render :js => "window.location.href='#{root_path}'"} 
