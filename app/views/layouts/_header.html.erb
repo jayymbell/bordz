@@ -7,24 +7,28 @@
 
         <div class="collapse navbar-collapse" id="navbarMenu">
             <ul class="navbar-nav mr-auto">
+            <% if logged_in?%>
                 <li class="nav-item">
                     <a class="nav-link" id="sidebar-btn">
                         <i class="fa fa-navicon"></i>
                     </a>
                 </li>
+            <%end%>
             </ul>
             <ul class="navbar-nav ml-auto">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle caret-off" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fa fa-cog"></i>
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Profile</a>
-                <a class="dropdown-item" href="#">Settings</a>
-                <div class="dropdown-divider"></div>
-                <%= link_to 'Users', users_path, class: 'dropdown-item' %>
-                </div>
-            </li>
+            <% if logged_in?%>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle caret-off" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-cog"></i>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Profile</a>
+                    <a class="dropdown-item" href="#">Settings</a>
+                    <div class="dropdown-divider"></div>
+                    <%= link_to 'Users', users_path, class: 'dropdown-item' %>
+                    </div>
+                </li>
+            <%end%>
             </ul>
         </div>
     </nav>
