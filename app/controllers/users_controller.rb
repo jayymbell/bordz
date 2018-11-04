@@ -28,11 +28,13 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        flash.now[:success] = "User was sucessfully created."
+        flash[:success] = "Check your email for a link to activation user account."
         format.html { redirect_to users_path }
         format.json { render :show, status: :created, location: @user }
+        format.js {render :js => "window.location.href='#{root_path}'"} 
+        
       else
-        format.html { render :new }
+        puts @user.errors.inspect
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
@@ -70,6 +72,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:first_name, :last_name, :email)
+      params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
     end
 end
