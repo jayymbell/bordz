@@ -24,7 +24,7 @@
       <%= form.text_field :email, id: :user_email %>
     </div>
 
-    <%if current_user == @user %>
+    <%if current_user.nil? || current_user == @user %>
       <div class="field">
         <%= form.label :password %>
         <%= form.password_field :password, id: :person_password %>
