@@ -20,7 +20,11 @@
         <td><%= user.first_name %></td>
         <td><%= user.last_name %></td>
         <td><%= user.email %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+        <%= link_to user, method: :delete, data: { confirm: 'Are you sure?' } do %>
+          <i class="fa fa-trash text-danger float-right"></i>
+        <%end%>
+        </td>
       </tr>
     <% end %>
   </tbody>

@@ -28,11 +28,14 @@ class GroupsController < ApplicationController
 
     respond_to do |format|
       if @group.save
-        format.html { redirect_to @group, notice: 'Group was successfully created.' }
+        flash[:success] = "Groups successfully created."
+        format.html { redirect_to groups_path}
         format.json { render :show, status: :created, location: @group }
+        format.js {render :js => "window.location.href='#{groups_path}'"} 
       else
         format.html { render :new }
         format.json { render json: @group.errors, status: :unprocessable_entity }
+        format.js {render 'new'} 
       end
     end
   end
@@ -42,11 +45,14 @@ class GroupsController < ApplicationController
   def update
     respond_to do |format|
       if @group.update(group_params)
-        format.html { redirect_to @group, notice: 'Group was successfully updated.' }
+        flash[:success] = "Group was successfully updated."
+        format.html { redirect_to @group}
         format.json { render :show, status: :ok, location: @group }
+        format.js {render :js => "window.location.href='#{group_path(@group)}'"} 
       else
         format.html { render :edit }
         format.json { render json: @group.errors, status: :unprocessable_entity }
+        format.js {render 'edit'} 
       end
     end
   end
@@ -56,7 +62,8 @@ class GroupsController < ApplicationController
   def destroy
     @group.destroy
     respond_to do |format|
-      format.html { redirect_to groups_url, notice: 'Group was successfully destroyed.' }
+      flash[:success] = 'Group was successfully destroyed.'
+      format.html { redirect_to groups_url }
       format.json { head :no_content }
     end
   end

@@ -1,14 +1,27 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col-sm-12">
+    <div class="actions float-right">
+    <%= link_to 'Back', groups_path, class: 'btn btn-link btn-sm' %>
+      <%= link_to 'Edit', edit_group_path(@group), class: 'btn btn-link btn-sm', remote: true %>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-12">
+    <div class="field">
+      <strong>Name:</strong>
+      <br/>
+      <%= @group.name %>
+    </div>
+  </div>
+</div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @group.name %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @group.description %>
-</p>
-
-<%= link_to 'Edit', edit_group_path(@group) %> |
-<%= link_to 'Back', groups_path %>
+<div class="row">
+  <div class="col-sm-12">
+    <div class="field">
+      <strong>Description:</strong>
+      <br>
+      <%= @group.description %>
+    </div>
+  </div>
+</div>
