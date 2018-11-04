@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'dashboards/show'
+  root 'dashboards#show'
 
   get '/login',   to: 'sessions#new'
   post '/login',  to: 'sessions#create'
