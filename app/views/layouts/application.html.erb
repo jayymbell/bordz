@@ -10,10 +10,10 @@
 
   <body>
     <%= render 'layouts/header'%>
-    <%= render 'layouts/notifications'%>
     <%if logged_in?%>
       <%= render 'layouts/sidebar'%>
     <%end%>
+    <%= render 'layouts/notifications'%>
     <div class="container-fluid">
       <br/>
       <%= yield %>

@@ -28,7 +28,8 @@ class PermissionsController < ApplicationController
 
     respond_to do |format|
       if @permission.save
-        format.html { redirect_to @permission, notice: 'Permission was successfully created.' }
+        flash[:success] = 'Permission was successfully created.'
+        format.html { redirect_to permissions_path }
         format.json { render :show, status: :created, location: @permission }
       else
         format.html { render :new }
