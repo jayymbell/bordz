@@ -24,7 +24,7 @@ class PermissionsController < ApplicationController
   # POST /permissions.json
   def create
     @permission = Permission.new(permission_params)
-    @permission.action = @permission.action.downcase
+    @permission.activity = @permission.activity.downcase
 
     respond_to do |format|
       if @permission.save
@@ -70,6 +70,6 @@ class PermissionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def permission_params
-      params.require(:permission).permit(:subject, :action)
+      params.require(:permission).permit(:subject, :activity)
     end
 end

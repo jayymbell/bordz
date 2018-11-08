@@ -2,8 +2,8 @@
 
 one:
   subject: MyString
-  action: MyString
+  activity: MyString
 
 two:
   subject: MyString
-  action: MyString
+  activity: MyString

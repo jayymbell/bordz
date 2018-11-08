@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181107010424) do
+ActiveRecord::Schema.define(version: 20181108223318) do
 
   create_table "groups", force: :cascade do |t|
     t.string "name"
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 20181107010424) do
 
   create_table "permissions", force: :cascade do |t|
     t.string "subject"
-    t.string "action"
+    t.string "activity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

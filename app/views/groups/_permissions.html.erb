@@ -22,7 +22,7 @@
           <div class="tab-pane fade show<%if subject == params[:view] || (params[:view].nil? && subject == "users")%> active<%end%>"" id="v-pills-<%= subject.capitalize %>" role="tabpanel" aria-labelledby="v-pills-<%= subject.capitalize %>-tab">
             <div class="card">
              
-                <%= form.collection_check_boxes(:permission_ids, Permission.where(subject: subject), :id, :action, boolean_style: :inline) do |p| %>
+                <%= form.collection_check_boxes(:permission_ids, Permission.where(subject: subject), :id, :activity, boolean_style: :inline) do |p| %>
           <ul class="list-group list-group-flush">
             <li class="list-group-item">
               <%= p.check_box %> <%= p.text.capitalize %> 
