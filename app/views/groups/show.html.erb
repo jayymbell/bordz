@@ -32,11 +32,17 @@
       <li class="nav-item">
         <a class="nav-link active" id="users-tab" data-toggle="tab" href="#users" role="tab" aria-controls="users" aria-selected="true">Members</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" id="permissions-tab" data-toggle="tab" href="#permissions" role="tab" aria-controls="permissions" aria-selected="true">Permissions</a>
+      </li>
     </ul>
 
     <div class="tab-content">
       <div class="tab-pane active" id="users" role="tabpanel" aria-labelledby="users-tab">
         <%= render 'users'%>
+      </div>
+      <div class="tab-pane" id="permissions" role="tabpanel" aria-labelledby="permissions-tab">
+        <%= render 'permissions'%>
       </div>
     </div>
   </div>

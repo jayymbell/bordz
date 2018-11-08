@@ -1,10 +1,11 @@
 <h1>Permissions</h1>
+<hr/>
 <div class="row">
   <div class="col-sm-3">
     <div class="card">
       <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
         <% Permission.select(:subject).map(&:subject).uniq.each do |subject|%>
-          <a class="nav-link" id="v-pills-<%= subject.capitalize %>-tab" data-toggle="pill" href="#v-pills-<%= subject.capitalize %>" role="tab" aria-controls="v-pills-<%= subject.capitalize %>"><%= subject.capitalize %></a>
+          <a class="nav-link<%if subject == params[:view] || (params[:view].nil? && subject == "users")%> active<%end%>" id="v-pills-<%= subject.capitalize %>-tab" data-toggle="pill" href="#v-pills-<%= subject.capitalize %>" role="tab" aria-controls="v-pills-<%= subject.capitalize %>"><%= subject.capitalize %></a>
         <%end%>
       </div>
     </div>
@@ -12,7 +13,7 @@
   <div class="col-sm-4">
     <div class="tab-content" id="v-pills-tabContent">
         <% Permission.select(:subject).map(&:subject).uniq.each do |subject|%>
-          <div class="tab-pane fade show" id="v-pills-<%= subject.capitalize %>" role="tabpanel" aria-labelledby="v-pills-<%= subject.capitalize %>-tab">
+          <div class="tab-pane fade show<%if subject == params[:view] || (params[:view].nil? && subject == "users")%> active<%end%>" id="v-pills-<%= subject.capitalize %>" role="tabpanel" aria-labelledby="v-pills-<%= subject.capitalize %>-tab">
           <div class="card>
           <ul class="list-group list-group-flush">
           <% Permission.select(:action).where("subject = ?", subject).map(&:action).each do |action|%>
