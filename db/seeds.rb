@@ -12,13 +12,13 @@ end
 
 if Permission.all.empty?
     Permission.create(subject: 'users', activity: 'create')
-    Permission.create(subject: 'users', activity: 'delete')
     Permission.create(subject: 'users', activity: 'deactivate')
     Permission.create(subject: 'users', activity: 'edit')
     Permission.create(subject: 'users', activity: 'search')
     Permission.create(subject: 'users', activity: 'view')
 
     Permission.create(subject: 'groups', activity: 'create')
+    Permission.create(subject: 'groups', activity: 'deactivate')
     Permission.create(subject: 'groups', activity: 'delete')
     Permission.create(subject: 'groups', activity: 'edit')
     Permission.create(subject: 'groups', activity: 'search')
