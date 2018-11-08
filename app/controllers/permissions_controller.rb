@@ -4,7 +4,6 @@ class PermissionsController < ApplicationController
   # GET /permissions
   # GET /permissions.json
   def index
-    @permissions = Permission.all
   end
 
   # GET /permissions/1
@@ -25,6 +24,7 @@ class PermissionsController < ApplicationController
   # POST /permissions.json
   def create
     @permission = Permission.new(permission_params)
+    @permission.action = @permission.action.downcase
 
     respond_to do |format|
       if @permission.save

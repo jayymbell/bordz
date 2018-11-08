@@ -12,11 +12,11 @@
   </div>
   <div class="col-sm-4">
     <div class="tab-content" id="v-pills-tabContent">
-        <% Permission.select(:subject).map(&:subject).uniq.each do |subject|%>
+        <% Permission.select(:subject).order(:subject).map(&:subject).uniq.each do |subject|%>
           <div class="tab-pane fade show<%if subject == params[:view] || (params[:view].nil? && subject == "users")%> active<%end%>" id="v-pills-<%= subject.capitalize %>" role="tabpanel" aria-labelledby="v-pills-<%= subject.capitalize %>-tab">
           <div class="card>
           <ul class="list-group list-group-flush">
-          <% Permission.select(:action).where("subject = ?", subject).map(&:action).each do |action|%>
+          <% Permission.select(:action).where("subject = ?", subject).order(:action).map(&:action).each do |action|%>
             <li class="list-group-item">
               <%= action.capitalize %>
             </li>
