@@ -44,7 +44,11 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
-      if @user.update(user_params)
+      if params[:deactivate]
+        @user.update_attribute(:activated => false)
+        flash[:success] = 'User was successfully deactivated.'
+        format.js {render :js => "window.location.href='#{user_path(@user)}'"} 
+      elsif @user.update(user_params)
         flash[:success] = 'User was successfully updated.'
         format.html { redirect_to @user }
         format.json { render :show, status: :ok, location: @user }
