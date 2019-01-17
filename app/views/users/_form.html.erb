@@ -2,8 +2,10 @@
   <%= render 'layouts/error_messages', object: form.object %>
 <div class="row">
   <div class="col-sm-6">
-    <%if user.activated%>
+    <%if user.activated && user != current_user%>
       <%= form.button 'Deactivate', name: "deactivate", class: 'btn btn-danger btn-sm' %>
+      <%elsif user != current_user%>
+      <%= form.button 'Activate', name: "activate", class: 'btn btn-success btn-sm' %>
     <%end%>
   </div>
   <div class="col-sm-6">
