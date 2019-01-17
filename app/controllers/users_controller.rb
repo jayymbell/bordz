@@ -48,6 +48,8 @@ class UsersController < ApplicationController
         @user.update_attribute(:activated => false)
         flash[:success] = 'User was successfully deactivated.'
         format.js {render :js => "window.location.href='#{user_path(@user)}'"} 
+      elsif params[:activate]
+        UserMailer.account_activation(@user).deliver_now
       elsif @user.update(user_params)
         flash[:success] = 'User was successfully updated.'
         format.html { redirect_to @user }
