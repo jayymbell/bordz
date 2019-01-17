@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :tickets
   resources :projects
   resources :permissions
   root 'dashboards#show'
