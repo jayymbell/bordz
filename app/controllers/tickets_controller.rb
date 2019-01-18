@@ -32,6 +32,7 @@ class TicketsController < ApplicationController
       if @ticket.save
         users = User.all.joins(:project_roles => :notifications).where("project_roles.project_id = ? AND notifications.id = ?", @ticket.project_id, 1)
         users.each do |user|
+          if ticket.reporter != user
           TicketMailer.new_ticket(@ticket, user).deliver_now
         end
         format.html { redirect_to @ticket, notice: 'Ticket was successfully created.' }
