@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Workflow:</strong>
+  <%= @workflow_transition.workflow %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @workflow_transition.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @workflow_transition.description %>
+</p>
+
+<p>
+  <strong>Start state:</strong>
+  <%= @workflow_transition.start_state %>
+</p>
+
+<p>
+  <strong>End state:</strong>
+  <%= @workflow_transition.end_state %>
+</p>
+
+<%= link_to 'Edit', edit_workflow_transition_path(@workflow_transition) %> |
+<%= link_to 'Back', workflow_transitions_path %>

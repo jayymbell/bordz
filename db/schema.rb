@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190118214553) do
+ActiveRecord::Schema.define(version: 20190118214749) do
 
   create_table "groups", force: :cascade do |t|
     t.string "name"
@@ -105,6 +105,17 @@ ActiveRecord::Schema.define(version: 20190118214553) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["workflow_id"], name: "index_workflow_states_on_workflow_id"
+  end
+
+  create_table "workflow_transitions", force: :cascade do |t|
+    t.integer "workflow_id"
+    t.string "name"
+    t.text "description"
+    t.integer "start_state"
+    t.integer "end_state"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["workflow_id"], name: "index_workflow_transitions_on_workflow_id"
   end
 
   create_table "workflows", force: :cascade do |t|
