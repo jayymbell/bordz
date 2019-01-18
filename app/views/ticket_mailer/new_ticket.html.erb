@@ -1,0 +1,5 @@
+<p>Hi <%= @user.first_name %>,</p>
+
+<p>
+<%= link_to "Ticket ##{@ticket.id}", ticket_url(@ticket) %> has been created for the <%=@ticket.project.name%> Project. Click the link to navigate to it.
+</p>

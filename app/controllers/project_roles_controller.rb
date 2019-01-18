@@ -60,7 +60,7 @@ class ProjectRolesController < ApplicationController
         @project_role.users.delete user
         format.html { redirect_to @project_role.project}
         format.json { render :show, status: :ok, location: @project_role.project }
-        format.js {render :js => "refresh_table();"}
+        format.js {render :js => "window.location.reload();"}
       elsif @project_role.update(project_role_params)
         format.html { redirect_to @project_role, notice: 'Project role was successfully updated.' }
         format.json { render :show, status: :ok, location: @project_role }

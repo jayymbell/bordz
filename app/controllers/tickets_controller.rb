@@ -30,6 +30,10 @@ class TicketsController < ApplicationController
 
     respond_to do |format|
       if @ticket.save
+        users = User.all.joins(:project_roles => :notifications).where("project_roles.project_id = ? AND notifications.id = ?", @ticket.project_id, 1)
+        users.each do |user|
+          TicketMailer.new_ticket(@ticket, user).deliver_now
+        end
         format.html { redirect_to @ticket, notice: 'Ticket was successfully created.' }
         format.json { render :show, status: :created, location: @ticket }
         format.js {render :js => "window.location.reload();"}
