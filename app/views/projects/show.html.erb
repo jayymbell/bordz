@@ -1,5 +1,6 @@
 <div class="row">
   <div class="col-sm-12">
+  <h3 style="display:inline-block;">Projects</h3>
     <div class="actions float-right">
     <%= link_to 'Back', projects_path, class: 'btn btn-link btn-sm' %>
       <%= link_to 'Edit', edit_project_path(@project), class: 'btn btn-link btn-sm', remote: true %>
@@ -9,7 +10,7 @@
 <div class="row">
   <div class="col-sm-12">
     <div class="field">
-      <h2><%= @project.name %></h2>
+      <h5><%= @project.name %></h5>
     </div>
   </div>
 </div>

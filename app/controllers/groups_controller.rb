@@ -62,19 +62,19 @@ class GroupsController < ApplicationController
         flash[:success] = "User was successfully added."
         format.html { redirect_to @group}
         format.json { render :show, status: :ok, location: @group }
-        format.js {render :js => "window.location.href='#{group_path(@group)}'"} 
+        format.js {render :js => "window.location.reload();"} 
       elsif !group_params[:remove_user].nil?
         user = User.find(group_params[:remove_user])
         @group.users.delete user
         flash[:success] = "User was successfully removed."
         format.html { redirect_to @group}
         format.json { render :show, status: :ok, location: @group }
-        format.js {render :js => "window.location.href='#{group_path(@group)}'"} 
+        format.js {render :js => "window.location.reload();"}
       elsif @group.update(group_params)
         flash[:success] = "Group was successfully updated."
         format.html { redirect_to @group}
         format.json { render :show, status: :ok, location: @group }
-        format.js {render :js => "window.location.href='#{group_path(@group)}'"} 
+        format.js {render :js => "window.location.reload();"}
       else
         format.html { render :edit }
         format.json { render json: @group.errors, status: :unprocessable_entity }

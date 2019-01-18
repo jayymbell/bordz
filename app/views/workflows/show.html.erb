@@ -1,14 +1,24 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col-sm-12">
+  <h3 style="display:inline-block;">Workflows</h3>
+    <div class="actions float-right">
+    <%= link_to 'Back', workflows_path, class: 'btn btn-link btn-sm' %>
+      <%= link_to 'Edit', edit_workflow_path(@workflow), class: 'btn btn-link btn-sm', remote: true %>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-12">
+    <div class="field">
+      <h5><%= @workflow.name %></h5>
+    </div>
+  </div>
+</div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @workflow.name %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @workflow.description %>
-</p>
-
-<%= link_to 'Edit', edit_workflow_path(@workflow) %> |
-<%= link_to 'Back', workflows_path %>
+<div class="row">
+  <div class="col-sm-12">
+    <div class="field">
+      <%= @workflow.description %>
+    </div>
+  </div>
+</div>

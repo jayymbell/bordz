@@ -1,29 +1,32 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+<div class="col-sm-12">
+<%= link_to 'New Workflow', new_workflow_path, class: 'btn btn-success btn-sm float-right', remote: true %>
+<h3 style="display:inline-block;">Workflows</h3>
 
-<h1>Workflows</h1>
-
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
+      <th>Id</th>
       <th>Name</th>
-      <th>Description</th>
-      <th colspan="3"></th>
+      <th></th>
     </tr>
   </thead>
 
   <tbody>
     <% @workflows.each do |workflow| %>
       <tr>
+        <td><%= link_to workflow.id, workflow_path(workflow) %></td>
         <td><%= workflow.name %></td>
-        <td><%= workflow.description %></td>
-        <td><%= link_to 'Show', workflow %></td>
-        <td><%= link_to 'Edit', edit_workflow_path(workflow) %></td>
-        <td><%= link_to 'Destroy', workflow, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+        <%= link_to workflow, method: :delete, data: { confirm: 'Are you sure?' } do %>
+          <i class="fa fa-trash text-danger float-right"></i>
+        <%end%>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Workflow', new_workflow_path %>
+</div>
+</div>

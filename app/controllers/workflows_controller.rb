@@ -30,9 +30,11 @@ class WorkflowsController < ApplicationController
       if @workflow.save
         format.html { redirect_to @workflow, notice: 'Workflow was successfully created.' }
         format.json { render :show, status: :created, location: @workflow }
+        format.js {render :js => "window.location.reload();"}
       else
         format.html { render :new }
         format.json { render json: @workflow.errors, status: :unprocessable_entity }
+        format.js {render 'new'} 
       end
     end
   end
@@ -44,9 +46,11 @@ class WorkflowsController < ApplicationController
       if @workflow.update(workflow_params)
         format.html { redirect_to @workflow, notice: 'Workflow was successfully updated.' }
         format.json { render :show, status: :ok, location: @workflow }
+        format.js {render :js => "window.location.reload();"}
       else
         format.html { render :edit }
         format.json { render json: @workflow.errors, status: :unprocessable_entity }
+        format.js {render 'edit'} 
       end
     end
   end
