@@ -16,6 +16,7 @@ class TicketsController < ApplicationController
   def new
     @ticket = Ticket.new
     @ticket.reported_by = current_user.id
+    @ticket.project_id = params[:project]
   end
 
   # GET /tickets/1/edit
