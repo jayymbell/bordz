@@ -48,7 +48,7 @@ class TicketsController < ApplicationController
       if @ticket.update(ticket_params)
         format.html { redirect_to @ticket, notice: 'Ticket was successfully updated.' }
         format.json { render :show, status: :ok, location: @ticket }
-        format.js {render :js => "window.location.href='#{ticket_path(@@ticket)}'"} 
+        format.js {render :js => "window.location.href='#{ticket_path(@ticket)}'"} 
       else
         format.html { render :edit }
         format.json { render json: @ticket.errors, status: :unprocessable_entity }
