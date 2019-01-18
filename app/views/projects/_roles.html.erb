@@ -21,8 +21,12 @@
             <td><%= link_to project_role.id, edit_project_role_path(project_role), remote: true %></td>
             <td><%= project_role.name %></td>
             <td>
+            <% text_color = 'text-success'%>
+            <% if !project_role.users.any?%>
+              <% text_color = 'text-danger'%>
+            <%end%>
               <%= link_to edit_project_role_path(project_role, view: 'users'), data: {remote: true } do %>
-                <i class="fa fa-users text-success float-right"></i>
+                <i class="fa fa-users <%= text_color %> float-right"></i>
               <%end%>
             </td>
             <td>
