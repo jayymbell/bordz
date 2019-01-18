@@ -1,0 +1,36 @@
+<hr/>
+<div class="row">
+  <div class="col-sm-3">
+  <h5>Projects</h5>
+    <div class="card">
+      <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+      <% index = 0%>
+        <% @projects.each do |project|%>
+        <%index = index +1 %>
+          <a class="nav-link <%if project.id == params[:view] || (params[:view].nil? && index == 1)%> active<%end%>" id="v-pills-<%= project.id %>-tab" data-toggle="pill" href="#v-pills-<%= project.id %>" role="tab" aria-controls="v-pills-<%= project.id %>"><%= project.name.capitalize %></a>
+        <%end%>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4">
+  <h5>Roles</h5>
+    <div class="tab-content" id="v-pills-tabContent">
+    <% index_2 = 0%>
+        <% @projects.each do |project|%>
+        <%index_2 = index_2 +1 %>
+          <div class="tab-pane fade show<%if project.id == params[:view] || (params[:view].nil? && index_2 == 1)%> active<%end%>" id="v-pills-<%= project.id %>" role="tabpanel" aria-labelledby="v-pills-<%= project.name.capitalize %>-tab">
+          <div class="card">
+          <ul class="list-group list-group-flush">
+          <% @project_roles.where("project_id = ?", project.id).order(:name).each do |role|%>
+            <li class="list-group-item">
+              <%= role.name.capitalize %>
+            </li>
+            </ul>
+          <%end%>
+          </ul>
+          </div>
+          </div>
+        <%end%>
+      </div>
+  </div>
+</div>

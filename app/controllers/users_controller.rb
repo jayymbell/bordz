@@ -10,6 +10,11 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    @projects = Project.joins(:roles => :users).where("users.id = ?", current_user.id)
+    @project_roles = ProjectRole.joins(:users).where("users.id = ?", current_user.id)
+
+    puts @projects
+    puts @project_roles
   end
 
   # GET /users/new
