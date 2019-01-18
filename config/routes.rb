@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :workflow_states
   resources :workflows
   resources :notifications
   resources :project_roles
