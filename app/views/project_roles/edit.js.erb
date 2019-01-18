@@ -1,0 +1,13 @@
+<%if params[:view] == 'users'%>
+    $('#dialog h3').html("Users");
+    $('.modal-body').html('<%= j render("users", project_role: @project_role ) %>');
+<%else%>
+    $('#dialog h3').html("Edit Project Role");
+    $('.modal-body').html('<%= j render("form", project_role: @project_role ) %>');
+<%end%>
+
+$('#dialog').modal("show");
+
+$('#dialog').on('shown.bs.modal', function () {
+$('.first_input').focus()
+})

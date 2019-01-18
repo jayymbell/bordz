@@ -15,10 +15,16 @@ class ProjectRolesController < ApplicationController
   # GET /project_roles/new
   def new
     @project_role = ProjectRole.new
+    @project_role.project_id = params[:project]
   end
 
   # GET /project_roles/1/edit
   def edit
+    if !@project_role.users.any?
+      @available_users = User.order(:last_name).map{|u| [u.full_name, u.id]}
+    else
+      @available_users = User.where("id NOT IN (?)", @project_role.users.map(&:id)).order(:last_name).map{|u| [u.full_name, u.id]}
+    end
   end
 
   # POST /project_roles
@@ -30,9 +36,11 @@ class ProjectRolesController < ApplicationController
       if @project_role.save
         format.html { redirect_to @project_role, notice: 'Project role was successfully created.' }
         format.json { render :show, status: :created, location: @project_role }
+        format.js {render :js => "window.location.reload();"}
       else
         format.html { render :new }
         format.json { render json: @project_role.errors, status: :unprocessable_entity }
+        format.js {render 'new'}
       end
     end
   end
@@ -41,12 +49,26 @@ class ProjectRolesController < ApplicationController
   # PATCH/PUT /project_roles/1.json
   def update
     respond_to do |format|
-      if @project_role.update(project_role_params)
+      if !project_role_params[:add_user].nil?
+        user = User.find(project_role_params[:add_user])
+        @project_role.users << user
+        format.html { redirect_to @group}
+        format.json { render :show, status: :ok, location: @group }
+        format.js {render :js => "refresh_table();"}
+      elsif !project_role_params[:remove_user].nil?
+        user = User.find(project_role_params[:remove_user])
+        @project_role.users.delete user
+        format.html { redirect_to @project_role.project}
+        format.json { render :show, status: :ok, location: @project_role.project }
+        format.js {render :js => "refresh_table();"}
+      elsif @project_role.update(project_role_params)
         format.html { redirect_to @project_role, notice: 'Project role was successfully updated.' }
         format.json { render :show, status: :ok, location: @project_role }
+        format.js {render :js => "window.location.reload();"}
       else
         format.html { render :edit }
         format.json { render json: @project_role.errors, status: :unprocessable_entity }
+        format.js {render 'edit'}
       end
     end
   end
@@ -58,6 +80,7 @@ class ProjectRolesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to project_roles_url, notice: 'Project role was successfully destroyed.' }
       format.json { head :no_content }
+      format.js {render :js => "window.location.reload();"}
     end
   end
 
@@ -69,6 +92,6 @@ class ProjectRolesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_role_params
-      params.require(:project_role).permit(:project, :name, :description)
+      params.require(:project_role).permit(:project_id, :name, :description, :add_user, :remove_user)
     end
 end

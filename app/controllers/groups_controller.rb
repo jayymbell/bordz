@@ -15,9 +15,9 @@ class GroupsController < ApplicationController
     puts @group.users.map(&:id).inspect
 
     if !@group.users.any?
-      @available_users = User.order(:last_name).map{|u| [u.last_name_first_name, u.id]}
+      @available_users = User.order(:last_name).map{|u| [u.full_name, u.id]}
     else
-      @available_users = User.where("id NOT IN (?)", @group.users.map(&:id)).order(:last_name).map{|u| [u.last_name_first_name, u.id]}
+      @available_users = User.where("id NOT IN (?)", @group.users.map(&:id)).order(:last_name).map{|u| [u.full_name, u.id]}
     end
     puts @available_users.inspect
   end
@@ -29,7 +29,7 @@ class GroupsController < ApplicationController
 
   # GET /groups/1/edit
   def edit
-    @available_users = User.order(:last_name).map{|u| [u.last_name_first_name, u.id]}
+
   end
 
   # POST /groups
@@ -43,7 +43,7 @@ class GroupsController < ApplicationController
         flash[:success] = "Groups successfully created."
         format.html { redirect_to groups_path}
         format.json { render :show, status: :created, location: @group }
-        format.js {render :js => "window.location.href='#{groups_path}'"} 
+        format.js {render :js => "window.location.reload();"}
       else
         format.html { render :new }
         format.json { render json: @group.errors, status: :unprocessable_entity }

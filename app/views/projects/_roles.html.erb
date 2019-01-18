@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col-sm-12">
+  <nav class="navbar navbar-dark bg-dark navbar-expand-lg" style="margin-top:20px;">
+    <%= link_to 'New Project Role', new_project_role_path(project: @project.id), class: 'btn btn-success btn-sm ml-auto', remote: true %>
+  </nav>
+
+    <table class="table table-striped" style="margin-top:20px;">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Name</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @project_roles.each do |project_role| %>
+          <tr>
+            <td><%= link_to project_role.id, edit_project_role_path(project_role), remote: true %></td>
+            <td><%= project_role.name %></td>
+            <td>
+              <%= link_to edit_project_role_path(project_role, view: 'users'), data: {remote: true } do %>
+                <i class="fa fa-users text-success float-right"></i>
+              <%end%>
+            </td>
+            <td>
+              <%= link_to project_role, method: :delete, data: { confirm: 'Are you sure?', remote: true } do %>
+                <i class="fa fa-trash text-danger float-right"></i>
+              <%end%>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

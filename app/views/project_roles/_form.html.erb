@@ -1,19 +1,15 @@
-<%= form_with(model: project_role, local: true) do |form| %>
-  <% if project_role.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(project_role.errors.count, "error") %> prohibited this project_role from being saved:</h2>
-
-      <ul>
-      <% project_role.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+<%= form_with(model: project_role, remote: true) do |form| %>
+  <%= render 'layouts/error_messages', object: form.object %>
+  <div class="row">
+  <div class="col-sm-12">
+    <div class="actions float-right">
+      <%= form.submit 'Submit', class: 'btn btn-link btn-sm' %>
     </div>
-  <% end %>
+  </div>
+</div>
 
   <div class="field">
-    <%= form.label :project %>
-    <%= form.text_field :project, id: :project_role_project %>
+    <%= form.hidden_field :project_id%>
   </div>
 
   <div class="field">
@@ -24,9 +20,5 @@
   <div class="field">
     <%= form.label :description %>
     <%= form.text_area :description, id: :project_role_description %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
   </div>
 <% end %>

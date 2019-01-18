@@ -12,6 +12,7 @@ class User < ApplicationRecord
     validate :password_complexity
 
     has_and_belongs_to_many :groups
+    has_and_belongs_to_many :project_roles
     has_many :assigned_tickets, :class_name => "Ticket", :foreign_key => "assigned_to"
     has_many :reported_tickets, :class_name => "Ticket", :foreign_key => "reported_by"
 

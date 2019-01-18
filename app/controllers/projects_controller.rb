@@ -11,6 +11,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1.json
   def show
     @tickets = @project.tickets
+    @project_roles = @project.roles
   end
 
   # GET /projects/new
