@@ -15,10 +15,12 @@ class WorkflowsController < ApplicationController
   # GET /workflows/new
   def new
     @workflow = Workflow.new
+    @workflow_states = WorkflowState.where(workflow_id: @workflow.id)
   end
 
   # GET /workflows/1/edit
   def edit
+    @workflow_states = WorkflowState.where(workflow_id: @workflow.id)
   end
 
   # POST /workflows
@@ -34,6 +36,7 @@ class WorkflowsController < ApplicationController
       else
         format.html { render :new }
         format.json { render json: @workflow.errors, status: :unprocessable_entity }
+        @workflow_states = WorkflowState.where(workflow_id: @workflow.id)
         format.js {render 'new'} 
       end
     end
@@ -50,6 +53,7 @@ class WorkflowsController < ApplicationController
       else
         format.html { render :edit }
         format.json { render json: @workflow.errors, status: :unprocessable_entity }
+        @workflow_states = WorkflowState.where(workflow_id: @workflow.id)
         format.js {render 'edit'} 
       end
     end
@@ -73,6 +77,6 @@ class WorkflowsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def workflow_params
-      params.require(:workflow).permit(:name, :description)
+      params.require(:workflow).permit(:name, :description, :start_state)
     end
 end

@@ -15,6 +15,8 @@ class WorkflowTransitionsController < ApplicationController
   # GET /workflow_transitions/new
   def new
     @workflow_transition = WorkflowTransition.new
+    @workflow_transition.workflow_id = params[:workflow]
+    @workflow_states = WorkflowState.where(workflow_id: @workflow_transition.workflow_id)
   end
 
   # GET /workflow_transitions/1/edit
@@ -30,9 +32,12 @@ class WorkflowTransitionsController < ApplicationController
       if @workflow_transition.save
         format.html { redirect_to @workflow_transition, notice: 'Workflow transition was successfully created.' }
         format.json { render :show, status: :created, location: @workflow_transition }
+        format.js {render :js => "window.location.reload();"}
       else
         format.html { render :new }
         format.json { render json: @workflow_transition.errors, status: :unprocessable_entity }
+        @workflow_states = WorkflowState.where(workflow_id: @workflow_transition.workflow_id)
+        format.js {render 'new'} 
       end
     end
   end
@@ -44,9 +49,12 @@ class WorkflowTransitionsController < ApplicationController
       if @workflow_transition.update(workflow_transition_params)
         format.html { redirect_to @workflow_transition, notice: 'Workflow transition was successfully updated.' }
         format.json { render :show, status: :ok, location: @workflow_transition }
+        format.js {render :js => "window.location.reload();"}
       else
         format.html { render :edit }
         format.json { render json: @workflow_transition.errors, status: :unprocessable_entity }
+        @workflow_states = WorkflowState.where(workflow_id: @workflow_transition.workflow_id)
+        format.js {render 'edit'} 
       end
     end
   end

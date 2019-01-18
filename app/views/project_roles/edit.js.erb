@@ -5,7 +5,7 @@
     $('#dialog h3').html("<%=@project_role.name %>");
     $('.modal-body').html('<%= j render("notifications", project_role: @project_role ) %>');
 <%else%>
-    $('#dialog h3').html("Edit Project Role");
+    $('#dialog h3').html("Edit Role");
     $('.modal-body').html('<%= j render("form", project_role: @project_role ) %>');
 <%end%>
 

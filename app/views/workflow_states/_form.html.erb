@@ -1,19 +1,15 @@
-<%= form_with(model: workflow_state, local: true) do |form| %>
-  <% if workflow_state.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(workflow_state.errors.count, "error") %> prohibited this workflow_state from being saved:</h2>
-
-      <ul>
-      <% workflow_state.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+<%= form_with(model: workflow_state, remote: true) do |form| %>
+  <%= render 'layouts/error_messages', object: form.object %>
+  <div class="row">
+  <div class="col-sm-12">
+    <div class="actions float-right">
+      <%= form.submit 'Submit', class: 'btn btn-link btn-sm' %>
     </div>
-  <% end %>
+  </div>
+</div>
 
   <div class="field">
-    <%= form.label :workflow_id %>
-    <%= form.text_field :workflow_id, id: :workflow_state_workflow_id %>
+    <%= form.hidden_field :workflow_id, id: :workflow_state_workflow_id %>
   </div>
 
   <div class="field">
@@ -26,7 +22,4 @@
     <%= form.text_area :description, id: :workflow_state_description %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
 <% end %>

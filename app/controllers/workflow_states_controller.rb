@@ -15,6 +15,7 @@ class WorkflowStatesController < ApplicationController
   # GET /workflow_states/new
   def new
     @workflow_state = WorkflowState.new
+    @workflow_state.workflow_id = params[:workflow]
   end
 
   # GET /workflow_states/1/edit
@@ -30,9 +31,11 @@ class WorkflowStatesController < ApplicationController
       if @workflow_state.save
         format.html { redirect_to @workflow_state, notice: 'Workflow state was successfully created.' }
         format.json { render :show, status: :created, location: @workflow_state }
+        format.js {render :js => "window.location.reload();"}
       else
         format.html { render :new }
         format.json { render json: @workflow_state.errors, status: :unprocessable_entity }
+        format.js {render 'new'} 
       end
     end
   end
@@ -44,9 +47,11 @@ class WorkflowStatesController < ApplicationController
       if @workflow_state.update(workflow_state_params)
         format.html { redirect_to @workflow_state, notice: 'Workflow state was successfully updated.' }
         format.json { render :show, status: :ok, location: @workflow_state }
+        format.js {render :js => "window.location.reload();"}
       else
         format.html { render :edit }
         format.json { render json: @workflow_state.errors, status: :unprocessable_entity }
+        format.js {render 'edit'} 
       end
     end
   end

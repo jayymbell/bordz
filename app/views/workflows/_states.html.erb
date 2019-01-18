@@ -1,0 +1,32 @@
+<div class="row">
+<div class="col-sm-12">
+<%= link_to 'New State', new_workflow_state_path(workflow: @workflow.id), class: 'btn btn-success btn-sm float-right', remote: true %>
+<h5 style="display:inline-block;">States</h5>
+
+<table class="table table-striped" style="margin-top: 10px;">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @workflow.states.each do |state| %>
+      <tr>
+        <td><%= link_to state.id, edit_workflow_state_path(state), remote: true %></td>
+        <td><%= state.name %></td>
+        <td>
+        <%= link_to state, method: :delete, data: { confirm: 'Are you sure?' } do %>
+          <i class="fa fa-trash text-danger float-right"></i>
+        <%end%>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+</div>
+</div>

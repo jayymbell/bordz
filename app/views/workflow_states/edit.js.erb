@@ -1,0 +1,9 @@
+$('#dialog h3').html("Edit State");
+
+$('.modal-body').html('<%= j render("form", workflow_state: @workflow_state ) %>');
+
+$('#dialog').modal("show");
+
+$('#dialog').on('shown.bs.modal', function () {
+$('.first_input').focus()
+})

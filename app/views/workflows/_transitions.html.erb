@@ -1,0 +1,36 @@
+<div class="row">
+<div class="col-sm-12">
+<%= link_to 'New Transition', new_workflow_transition_path(workflow: @workflow.id), class: 'btn btn-success btn-sm float-right', remote: true %>
+<h5 style="display:inline-block;">Transitions</h5>
+
+<table class="table table-striped" style="margin-top: 10px;">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Starting State</th>
+      <th>Ending State</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @workflow.transitions.each do |transition| %>
+      <tr>
+        <td><%= link_to transition.id, workflow_transition_path(transition) %></td>
+        <td><%= transition.name %></td>
+        <td><%= transition.starting_state.name %></td>
+        <td><%= transition.ending_state.name %></td>
+        <td>
+        <%= link_to transition, method: :delete, data: { confirm: 'Are you sure?' } do %>
+          <i class="fa fa-trash text-danger float-right"></i>
+        <%end%>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+</div>
+</div>

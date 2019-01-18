@@ -1,19 +1,15 @@
-<%= form_with(model: workflow_transition, local: true) do |form| %>
-  <% if workflow_transition.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(workflow_transition.errors.count, "error") %> prohibited this workflow_transition from being saved:</h2>
-
-      <ul>
-      <% workflow_transition.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+<%= form_with(model: workflow_transition, remote: true) do |form| %>
+  <%= render 'layouts/error_messages', object: form.object %>
+  <div class="row">
+  <div class="col-sm-12">
+    <div class="actions float-right">
+      <%= form.submit 'Submit', class: 'btn btn-link btn-sm' %>
     </div>
-  <% end %>
+  </div>
+</div>
 
   <div class="field">
-    <%= form.label :workflow_id %>
-    <%= form.text_field :workflow_id, id: :workflow_transition_workflow_id %>
+    <%= form.hidden_field :workflow_id, id: :workflow_transition_workflow_id %>
   </div>
 
   <div class="field">
@@ -28,15 +24,23 @@
 
   <div class="field">
     <%= form.label :start_state %>
-    <%= form.number_field :start_state, id: :workflow_transition_start_state %>
+    <%= form.collection_select(:start_state, @workflow_states, :id, :name, :include_blank => 'None')%>
   </div>
 
   <div class="field">
     <%= form.label :end_state %>
-    <%= form.number_field :end_state, id: :workflow_transition_end_state %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
+    <%= form.collection_select(:end_state, @workflow_states, :id, :name, :include_blank => 'None')%>
   </div>
 <% end %>
+
+<script>
+
+   $("select[name='workflow_transition[start_state]']").change(function() {
+    
+  });
+
+  $("select[name='workflow_transition[end_state]']").change(function() {
+    
+  });
+
+</script>

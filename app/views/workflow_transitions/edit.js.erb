@@ -1,0 +1,9 @@
+$('#dialog h3').html("Edit Transition");
+
+$('.modal-body').html('<%= j render("form", workflow_transition: @workflow_transition ) %>');
+
+$('#dialog').modal("show");
+
+$('#dialog').on('shown.bs.modal', function () {
+$('.first_input').focus()
+})
