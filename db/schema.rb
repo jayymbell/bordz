@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190118183126) do
+ActiveRecord::Schema.define(version: 20190118183955) do
 
   create_table "groups", force: :cascade do |t|
     t.string "name"
@@ -36,6 +36,12 @@ ActiveRecord::Schema.define(version: 20190118183126) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "notifications_project_roles", id: false, force: :cascade do |t|
+    t.integer "notification_id", null: false
+    t.integer "project_role_id", null: false
+    t.index ["project_role_id", "notification_id"], name: "notifications_project_roles_index"
   end
 
   create_table "permissions", force: :cascade do |t|

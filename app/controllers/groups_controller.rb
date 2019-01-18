@@ -91,6 +91,7 @@ class GroupsController < ApplicationController
       flash[:success] = 'Group was successfully destroyed.'
       format.html { redirect_to groups_url }
       format.json { head :no_content }
+      format.js {render :js => "window.location.reload();"}
     end
   end
 

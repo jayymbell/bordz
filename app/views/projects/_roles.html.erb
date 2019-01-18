@@ -11,6 +11,7 @@
           <th>Name</th>
           <th></th>
           <th></th>
+          <th></th>
         </tr>
       </thead>
 
@@ -22,6 +23,11 @@
             <td>
               <%= link_to edit_project_role_path(project_role, view: 'users'), data: {remote: true } do %>
                 <i class="fa fa-users text-success float-right"></i>
+              <%end%>
+            </td>
+            <td>
+              <%= link_to edit_project_role_path(project_role, view: 'notifications'), data: {remote: true } do %>
+                <i class="fa fa-cog text-primary float-right"></i>
               <%end%>
             </td>
             <td>

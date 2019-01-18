@@ -1,29 +1,32 @@
-<p id="notice"><%= notice %></p>
-
+<div class="row">
+<div class="col-sm-12">
+<%= link_to 'New Notification', new_notification_path, class: 'btn btn-success btn-sm float-right', remote: true %>
 <h1>Notifications</h1>
 
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
+      <th>Id</th>
       <th>Name</th>
-      <th>Description</th>
-      <th colspan="3"></th>
+      <th></th>
     </tr>
   </thead>
 
   <tbody>
     <% @notifications.each do |notification| %>
       <tr>
+        <td><%= link_to notification.id, edit_notification_path(notification), remote: true %></td>
         <td><%= notification.name %></td>
-        <td><%= notification.description %></td>
-        <td><%= link_to 'Show', notification %></td>
-        <td><%= link_to 'Edit', edit_notification_path(notification) %></td>
-        <td><%= link_to 'Destroy', notification, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+        <%= link_to notification, method: :delete, data: { confirm: 'Are you sure?' } do %>
+          <i class="fa fa-trash text-danger float-right"></i>
+        <%end%>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Notification', new_notification_path %>
+</div>
+</div>

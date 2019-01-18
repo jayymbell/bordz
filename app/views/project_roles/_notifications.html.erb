@@ -1,0 +1,19 @@
+<%= form_with(model: project_role, remote: true) do |form| %>
+  <%= render 'layouts/error_messages', object: form.object %>
+  <div class="row">
+  <div class="col-sm-12">
+    <div class="actions float-right">
+      <%= form.submit 'Submit', class: 'btn btn-link btn-sm' %>
+    </div>
+  </div>
+</div>
+<%= form.collection_check_boxes(:notification_ids, Notification.all, :id, :name, boolean_style: :inline) do |p| %>
+          <div class="row">
+          <div class="col-sm-4">
+          <%= p.check_box %> <%= p.text.titleize %> 
+          </div>
+          <div class="col-sm-8">
+          </div>
+          </div>
+        <%end%>
+        <%end%>
