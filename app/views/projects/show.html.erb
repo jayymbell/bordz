@@ -9,9 +9,7 @@
 <div class="row">
   <div class="col-sm-12">
     <div class="field">
-      <strong>Name</strong>
-      <br/>
-      <%= @project.name %>
+      <h2><%= @project.name %></h2>
     </div>
   </div>
 </div>
@@ -19,8 +17,6 @@
 <div class="row">
   <div class="col-sm-12">
     <div class="field">
-      <strong>Description</strong>
-      <br>
       <%= @project.description %>
     </div>
   </div>
@@ -32,11 +28,17 @@
       <li class="nav-item">
         <a class="nav-link active" id="tickets-tab" data-toggle="tab" href="#tickets" role="tab" aria-controls="tickets" aria-selected="true">Tickets</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" id="roles-tab" data-toggle="tab" href="#roles" role="tab" aria-controls="roles" aria-selected="true">Roles</a>
+      </li>
     </ul>
 
     <div class="tab-content">
       <div class="tab-pane active" id="tickets" role="tabpanel" aria-labelledby="tickets-tab">
         <%= render 'tickets'%>
+      </div>
+      <div class="tab-pane" id="roles" role="tabpanel" aria-labelledby="roles-tab">
+        <%= render 'roles'%>
       </div>
     </div>
   </div>
