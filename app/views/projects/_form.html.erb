@@ -18,6 +18,11 @@
       <%= form.label :description %>
       <%= form.text_area :description, id: :project_description , style: "height: 200px;"%>
     </div>
+
+    <div class="field">
+      <%= form.label :workflow %>
+      <%= form.collection_select(:workflow, @workflows, :id, :name, :include_blank => 'None')%>
+    </div>
   </div>
 </div>
 <% end %>

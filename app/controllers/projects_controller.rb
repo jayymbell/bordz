@@ -17,10 +17,12 @@ class ProjectsController < ApplicationController
   # GET /projects/new
   def new
     @project = Project.new
+    @workflows = Workflow.all
   end
 
   # GET /projects/1/edit
   def edit
+    @workflows = Workflow.all
   end
 
   # POST /projects
@@ -34,6 +36,7 @@ class ProjectsController < ApplicationController
         format.json { render :show, status: :created, location: @project }
         format.js {render :js => "window.location.href='#{projects_path}'"} 
       else
+        @workflows = Workflow.all
         format.html { render :new }
         format.json { render json: @project.errors, status: :unprocessable_entity }
         format.js {render 'new'}
@@ -50,6 +53,7 @@ class ProjectsController < ApplicationController
         format.json { render :show, status: :ok, location: @project }
         format.js {render :js => "window.location.href='#{project_path(@project)}'"} 
       else
+        @workflows = Workflow.all
         format.html { render :edit }
         format.json { render json: @project.errors, status: :unprocessable_entity }
         format.js {render 'edit'}
