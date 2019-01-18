@@ -34,6 +34,7 @@ class TicketsController < ApplicationController
         users.each do |user|
           if ticket.reporter != user
           TicketMailer.new_ticket(@ticket, user).deliver_now
+          end
         end
         format.html { redirect_to @ticket, notice: 'Ticket was successfully created.' }
         format.json { render :show, status: :created, location: @ticket }
