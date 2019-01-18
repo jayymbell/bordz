@@ -1,5 +1,53 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col-sm-12">
+    <div class="actions float-right">
+    <%= link_to 'Back', tickets_path, class: 'btn btn-link btn-sm' %>
+      <%= link_to 'Edit', edit_ticket_path(@ticket), class: 'btn btn-link btn-sm', remote: true %>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-9">
+    <h2><%= @ticket.subject%></h2>
+  </div>
+  <div class="col-sm-3">
+    <span style="float: right;"> 
+    <%= @ticket.created_at.to_formatted_s(:long_ordinal)  %>
+    <br/>
+    </span>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-3">
+    <div class="field">
+      <strong>Assigned To</strong>
+      <br/>
+      <%if @ticket.assignee.nil?%>
+        Unassigned
+      <%else%>
+        <%= @ticket.assignee.full_name %>
+      <%end%>
+    </div>
+  </div>
+  <div class="col-sm-3">
+    <div class="field">
+      <strong>Reported By</strong>
+      <br/>
+      <%= @ticket.reporter.full_name %>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-12">
+    <div class="field">
+      <strong>Description</strong>
+      <br>
+      <%= @ticket.description %>
+    </div>
+  </div>
+</div>
 
+<!-- 
 <p>
   <strong>Assigned to:</strong>
   <%= @ticket.assigned_to %>
@@ -27,3 +75,4 @@
 
 <%= link_to 'Edit', edit_ticket_path(@ticket) %> |
 <%= link_to 'Back', tickets_path %>
+-->

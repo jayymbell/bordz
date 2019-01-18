@@ -1,42 +1,48 @@
-<%= form_with(model: ticket, local: true) do |form| %>
-  <% if ticket.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(ticket.errors.count, "error") %> prohibited this ticket from being saved:</h2>
-
-      <ul>
-      <% ticket.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+<%= form_with(model: ticket, remote: true) do |form| %>
+  <%= render 'layouts/error_messages', object: form.object %>
+  <div class="row">
+  <div class="col-sm-12">
+    <div class="actions float-right">
+      <%= form.submit 'Submit', class: 'btn btn-link btn-sm' %>
     </div>
-  <% end %>
-
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-12">
+  <div class="field">
+    <%= form.label :project_id %>
+    <%= form.collection_select(:project_id, Project.all, :id, :name, :include_blank => 'None')%>
+  </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-6">
   <div class="field">
     <%= form.label :assigned_to %>
-    <%= form.number_field :assigned_to, id: :ticket_assigned_to %>
+    <%= form.collection_select(:assigned_to, User.all, :id, :full_name, :include_blank => 'None')%>
   </div>
 
-  <div class="field">
+  </div>
+  <div class="col-sm-6">
+    <div class="field">
     <%= form.label :reported_by %>
-    <%= form.number_field :reported_by, id: :ticket_reported_by %>
+    <%= form.collection_select(:reported_by, User.all, :id, :full_name, :include_blank => 'None')%>
   </div>
-
-  <div class="field">
+  </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+    <div class="field">
+    <div class="field">
     <%= form.label :subject %>
     <%= form.text_field :subject, id: :ticket_subject %>
   </div>
 
   <div class="field">
     <%= form.label :description %>
-    <%= form.text_area :description, id: :ticket_description %>
+    <%= form.text_area :description, id: :ticket_description, style: "height: 200px;" %>
   </div>
-
-  <div class="field">
-    <%= form.label :project_id %>
-    <%= form.text_field :project_id, id: :ticket_project_id %>
   </div>
-
-  <div class="actions">
-    <%= form.submit %>
+  </div>
   </div>
 <% end %>

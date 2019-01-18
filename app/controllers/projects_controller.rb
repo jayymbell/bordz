@@ -30,9 +30,11 @@ class ProjectsController < ApplicationController
       if @project.save
         format.html { redirect_to @project, notice: 'Project was successfully created.' }
         format.json { render :show, status: :created, location: @project }
+        format.js {render :js => "window.location.href='#{projects_path}'"} 
       else
         format.html { render :new }
         format.json { render json: @project.errors, status: :unprocessable_entity }
+        format.js {render 'new'}
       end
     end
   end
@@ -44,9 +46,11 @@ class ProjectsController < ApplicationController
       if @project.update(project_params)
         format.html { redirect_to @project, notice: 'Project was successfully updated.' }
         format.json { render :show, status: :ok, location: @project }
+        format.js {render :js => "window.location.href='#{project_path(@project)}'"} 
       else
         format.html { render :edit }
         format.json { render json: @project.errors, status: :unprocessable_entity }
+        format.js {render 'edit'}
       end
     end
   end

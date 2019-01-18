@@ -15,6 +15,7 @@ class TicketsController < ApplicationController
   # GET /tickets/new
   def new
     @ticket = Ticket.new
+    @ticket.reported_by = current_user.id
   end
 
   # GET /tickets/1/edit
@@ -30,9 +31,11 @@ class TicketsController < ApplicationController
       if @ticket.save
         format.html { redirect_to @ticket, notice: 'Ticket was successfully created.' }
         format.json { render :show, status: :created, location: @ticket }
+        format.js {render :js => "window.location.href='#{ticket_path(@ticket)}'"} 
       else
         format.html { render :new }
         format.json { render json: @ticket.errors, status: :unprocessable_entity }
+        format.js {render 'new'}
       end
     end
   end
@@ -44,9 +47,11 @@ class TicketsController < ApplicationController
       if @ticket.update(ticket_params)
         format.html { redirect_to @ticket, notice: 'Ticket was successfully updated.' }
         format.json { render :show, status: :ok, location: @ticket }
+        format.js {render :js => "window.location.href='#{ticket_path(@@ticket)}'"} 
       else
         format.html { render :edit }
         format.json { render json: @ticket.errors, status: :unprocessable_entity }
+        format.js {render 'edit'} 
       end
     end
   end
