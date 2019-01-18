@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190118183955) do
+ActiveRecord::Schema.define(version: 20190118210910) do
 
   create_table "groups", force: :cascade do |t|
     t.string "name"
@@ -96,6 +96,13 @@ ActiveRecord::Schema.define(version: 20190118183955) do
     t.datetime "activated_at"
     t.string "reset_digest"
     t.datetime "reset_sent_at"
+  end
+
+  create_table "workflows", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

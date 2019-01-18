@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :workflows
   resources :notifications
   resources :project_roles
   resources :tickets
