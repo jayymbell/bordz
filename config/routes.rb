@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :boards
   resources :ticket_comments
   resources :workflow_transitions
   resources :workflow_states
