@@ -33,9 +33,11 @@ class BoardColumnsController < ApplicationController
       if @board_column.save
         format.html { redirect_to @board_column, notice: 'Board column was successfully created.' }
         format.json { render :show, status: :created, location: @board_column }
+        format.js {render :js => "window.location.reload();"}
       else
         format.html { render :new }
         format.json { render json: @board_column.errors, status: :unprocessable_entity }
+        format.js {render 'new'} 
       end
     end
   end
@@ -47,9 +49,11 @@ class BoardColumnsController < ApplicationController
       if @board_column.update(board_column_params)
         format.html { redirect_to @board_column, notice: 'Board column was successfully updated.' }
         format.json { render :show, status: :ok, location: @board_column }
+        format.js {render :js => "window.location.reload();"}
       else
         format.html { render :edit }
         format.json { render json: @board_column.errors, status: :unprocessable_entity }
+        format.js {render 'edit'} 
       end
     end
   end
@@ -61,6 +65,7 @@ class BoardColumnsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to board_columns_url, notice: 'Board column was successfully destroyed.' }
       format.json { head :no_content }
+      format.js {render :js => "window.location.reload();"}
     end
   end
 
