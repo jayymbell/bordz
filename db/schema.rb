@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190119010657) do
+ActiveRecord::Schema.define(version: 20190119015123) do
 
   create_table "groups", force: :cascade do |t|
     t.string "name"
@@ -64,6 +64,12 @@ ActiveRecord::Schema.define(version: 20190119010657) do
     t.integer "user_id", null: false
     t.integer "project_role_id", null: false
     t.index ["user_id", "project_role_id"], name: "index_project_roles_users_on_user_id_and_project_role_id"
+  end
+
+  create_table "project_roles_workflow_states", id: false, force: :cascade do |t|
+    t.integer "project_role_id", null: false
+    t.integer "workflow_state_id", null: false
+    t.index ["project_role_id", "workflow_state_id"], name: "project_role_workflow_states_index"
   end
 
   create_table "projects", force: :cascade do |t|

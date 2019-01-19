@@ -18,9 +18,11 @@
     <% @ticket.state.transitions.each do |transition|%>
       <%= form_with(model: @ticket, remote: true) do |form| %>
       <%= form.hidden_field :transition_ticket, value: transition.id%>
+        <% if current_user.project_roles.joins(:workflow_states).where("workflow_states.id = ?", @ticket.state.id).any?%>
         <%= form.button  class: "btn btn-success" do %>
             <%= transition.name %>
           <%end%>
+        <%end%>
       <%end%>
     <%end%>
     </span>

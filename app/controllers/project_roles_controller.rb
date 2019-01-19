@@ -55,7 +55,7 @@ class ProjectRolesController < ApplicationController
         @project_role.users << user
         format.html { redirect_to @group}
         format.json { render :show, status: :ok, location: @group }
-        format.js {render :js => "refresh_table();"}
+        format.js {render :js => "window.location.reload()"}
       elsif !project_role_params[:remove_user].nil?
         user = User.find(project_role_params[:remove_user])
         @project_role.users.delete user
@@ -93,6 +93,6 @@ class ProjectRolesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_role_params
-      params.require(:project_role).permit(:project_id, :name, :description, :add_user, :remove_user, notification_ids: [])
+      params.require(:project_role).permit(:project_id, :name, :description, :add_user, :remove_user, notification_ids: [], workflow_state_ids: [])
     end
 end

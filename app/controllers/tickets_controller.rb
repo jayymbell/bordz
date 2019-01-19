@@ -59,7 +59,6 @@ class TicketsController < ApplicationController
   def update
     respond_to do |format|
       if !ticket_params[:transition_ticket].nil?
-        puts "DEBUG"
         puts ticket_params[:transition_ticket].inspect
         transition = WorkflowTransition.find(ticket_params[:transition_ticket])
         if !transition.nil?
@@ -72,14 +71,14 @@ class TicketsController < ApplicationController
             end          
           end
 
-          format.js {render :js => "window.location.href='#{ticket_path(@ticket)}'"}
+          format.js {render :js => "window.location.reload()"}
         else
           format.js {render 'edit'} 
         end
       elsif @ticket.update(ticket_params)
         format.html { redirect_to @ticket, notice: 'Ticket was successfully updated.' }
         format.json { render :show, status: :ok, location: @ticket }
-        format.js {render :js => "window.location.href='#{ticket_path(@ticket)}'"} 
+        format.js {render :js => "window.location.reload()"}
       else
         format.html { render :edit }
         format.json { render json: @ticket.errors, status: :unprocessable_entity }

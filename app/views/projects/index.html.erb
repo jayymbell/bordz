@@ -8,6 +8,7 @@
     <tr>
       <th>Id</th>
       <th>Name</th>
+      <th>Workflow</th>
       <th></th>
     </tr>
   </thead>
@@ -17,6 +18,7 @@
       <tr>
         <td><%= link_to project.id, project_path(project) %></td>
         <td><%= project.name %></td>
+        <td><%= project.workflow.name %></td>
         <td>
         <%= link_to project, method: :delete, data: { confirm: 'Are you sure?' } do %>
           <i class="fa fa-trash text-danger float-right"></i>

@@ -1,0 +1,18 @@
+<h5>States</h5>
+<%= form_with(model: project_role, remote: true) do |form| %>
+  <%= render 'layouts/error_messages', object: form.object %>
+  <div class="row">
+  <div class="col-sm-12">
+    <div class="actions float-right">
+      <%= form.submit 'Submit', class: 'btn btn-link btn-sm' %>
+    </div>
+  </div>
+</div>
+<%= form.collection_check_boxes(:workflow_state_ids, WorkflowState.where(workflow_id: @project_role.project.workflow.id), :id, :name, boolean_style: :inline) do |p| %>
+          <div class="row">
+          <div class="col-sm-12">
+          <%= p.check_box %> <%= p.text.titleize %> 
+          </div>
+          </div>
+        <%end%>
+        <%end%>
