@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190119225009) do
+ActiveRecord::Schema.define(version: 20190119233426) do
 
   create_table "board_columns", force: :cascade do |t|
     t.integer "board_id"
@@ -26,6 +26,16 @@ ActiveRecord::Schema.define(version: 20190119225009) do
     t.integer "board_column_id", null: false
     t.integer "workflow_state_id", null: false
     t.index ["board_column_id", "workflow_state_id"], name: "boards_column_sorkflow_state_index"
+  end
+
+  create_table "board_sprints", force: :cascade do |t|
+    t.integer "board_id"
+    t.datetime "starts_on"
+    t.datetime "ends_on"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["board_id"], name: "index_board_sprints_on_board_id"
   end
 
   create_table "boards", force: :cascade do |t|

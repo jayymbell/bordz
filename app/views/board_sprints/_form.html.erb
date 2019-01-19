@@ -1,0 +1,37 @@
+<%= form_with(model: board_sprint, local: true) do |form| %>
+  <% if board_sprint.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(board_sprint.errors.count, "error") %> prohibited this board_sprint from being saved:</h2>
+
+      <ul>
+      <% board_sprint.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :board_id %>
+    <%= form.text_field :board_id, id: :board_sprint_board_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :starts_on %>
+    <%= form.datetime_select :starts_on, id: :board_sprint_starts_on %>
+  </div>
+
+  <div class="field">
+    <%= form.label :ends_on %>
+    <%= form.datetime_select :ends_on, id: :board_sprint_ends_on %>
+  </div>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :board_sprint_name %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

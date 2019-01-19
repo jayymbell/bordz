@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Board:</strong>
+  <%= @board_sprint.board %>
+</p>
+
+<p>
+  <strong>Starts on:</strong>
+  <%= @board_sprint.starts_on %>
+</p>
+
+<p>
+  <strong>Ends on:</strong>
+  <%= @board_sprint.ends_on %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @board_sprint.name %>
+</p>
+
+<%= link_to 'Edit', edit_board_sprint_path(@board_sprint) %> |
+<%= link_to 'Back', board_sprints_path %>

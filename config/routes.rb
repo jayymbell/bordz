@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :board_sprints
   resources :board_columns do
     collection do
       patch :sort
