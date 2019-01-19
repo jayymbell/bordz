@@ -7,17 +7,11 @@
     </div>
   </div>
 </div>
-<div class="field">
     <%= form.hidden_field :workflow_id%>
-  </div>
-<div class="row">
-  <div class="col-sm-12">
-  <div class="field">
-    <%= form.label :project_id %>
-    <%= form.collection_select(:project_id, Project.all, :id, :name, :include_blank => 'None')%>
-  </div>
-  </div>
-</div>
+
+
+    <%= form.hidden_field:project_id%>
+
 <div class="row">
   <div class="col-sm-6">
   <div class="field">
