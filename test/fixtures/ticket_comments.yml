@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  comment: MyText
+  created_by: 1
+  ticket: one
+
+two:
+  comment: MyText
+  created_by: 1
+  ticket: two

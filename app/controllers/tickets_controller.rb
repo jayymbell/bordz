@@ -10,6 +10,9 @@ class TicketsController < ApplicationController
   # GET /tickets/1
   # GET /tickets/1.json
   def show
+    @ticket_comment = TicketComment.new
+    @ticket_comment.ticket_id = @ticket.id
+    @ticket_comment.created_by = current_user.id
   end
 
   # GET /tickets/new

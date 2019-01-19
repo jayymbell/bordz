@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Comment:</strong>
+  <%= @ticket_comment.comment %>
+</p>
+
+<p>
+  <strong>Created by:</strong>
+  <%= @ticket_comment.created_by %>
+</p>
+
+<p>
+  <strong>Ticket:</strong>
+  <%= @ticket_comment.ticket %>
+</p>
+
+<%= link_to 'Edit', edit_ticket_comment_path(@ticket_comment) %> |
+<%= link_to 'Back', ticket_comments_path %>

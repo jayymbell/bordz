@@ -6,6 +6,8 @@ class Ticket < ApplicationRecord
   has_many :states, :class_name => "TicketWorkflowState", foreign_key: "ticket_id"
   has_many :transitions, :class_name => "TicketWorkflowTransition", foreign_key: "ticket_id"
 
+  has_many :comments, :class_name => "TicketComment"
+
   validates :reported_by, :project_id, :presence => true
 
   def state
