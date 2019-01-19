@@ -2,9 +2,9 @@
 <div class="col-sm-12">
 <h5 style="display:inline-block;">Columns</h5>
 <%= link_to 'New Column', new_board_column_path(board: @board.id), class: 'btn btn-success btn-sm float-right', remote: true %>
-    <ul class="list-group" style="margin-top: 20px;">
+    <ul id="board_columns" class="list-group" style="margin-top: 20px;" data-url="<%= sort_board_columns_path %>">
     <% @columns.each do |column| %>
-        <li class="list-group-item">
+        <li class="list-group-item" id="<%= dom_id(column)%>">
         <%= link_to column.name, edit_board_column_path(column), remote: true  %>
         <%= link_to column, method: :delete, data: { confirm: 'Are you sure?', style: "float: right;" } do %>
           <i class="fa fa-trash text-danger float-right"></i>
@@ -13,8 +13,27 @@
     <%end%>
     </ul>
 
-
-
 <br>
 </div>
 </div>
+
+<script>
+ $("#board_columns").sortable({
+    update: function(e, ui) {
+
+       $.ajax({
+        url: $(this).data("url"),
+        type: "PATCH",
+        data: $(this).sortable('serialize'),
+            beforeSend: function(xhr) {
+           xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
+},
+        success: function(){
+          
+        },
+        error: function(){
+        }
+        });
+    }
+  });
+</script>

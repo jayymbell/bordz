@@ -1,6 +1,15 @@
 class BoardColumnsController < ApplicationController
   before_action :set_board_column, only: [:show, :edit, :update, :destroy]
 
+  def sort
+    puts params
+    params[:board_column].each_with_index do |id, index|
+      BoardColumn.where(id: id).update_all(position: index + 1)
+    end
+
+    head :ok
+  end
+
   # GET /board_columns
   # GET /board_columns.json
   def index

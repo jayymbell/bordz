@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
-  resources :board_columns
+  resources :board_columns do
+    collection do
+      patch :sort
+    end
+  end
+
+
   resources :boards
   resources :ticket_comments
   resources :workflow_transitions
