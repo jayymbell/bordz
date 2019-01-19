@@ -1,27 +1,32 @@
-<%= form_with(model: board, local: true) do |form| %>
-  <% if board.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(board.errors.count, "error") %> prohibited this board from being saved:</h2>
-
-      <ul>
-      <% board.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+<%= form_with(model: board, remote: true) do |form| %>
+  <%= render 'layouts/error_messages', object: form.object %>
+  <div class="row">
+  <div class="col-sm-12">
+    <div class="actions float-right">
+      <%= form.submit 'Submit', class: 'btn btn-link btn-sm' %>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name, id: :board_name %>
   </div>
+</div>
+<div class="row">
+  <div class="col-sm-12">
+    <div class="field">
+      <%= form.label :name %>
+      <%= form.text_field :name, id: :board_name %>
+    </div>
 
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description, id: :board_description %>
+    <div class="field">
+      <%= form.label :description %>
+      <%= form.text_area :description, id: :board_description , style: "height: 200px;"%>
+    </div>
   </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+</div>
+<h5 style="margin-top: 10px;">Projects</h5>
+  
+<%= form.collection_check_boxes(:project_ids, Project.all, :id, :name, boolean_style: :inline) do |p| %>
+          <div class="row">
+          <div class="col-sm-12">
+          <%= p.check_box %> <%= p.text.titleize %> 
+          </div>
+          </div>
+        <%end%>
 <% end %>

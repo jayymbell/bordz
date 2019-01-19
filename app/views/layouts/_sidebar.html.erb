@@ -3,17 +3,22 @@
   <ul class="list-group list-group-flush">
   <%= link_to root_path, class: 'sidebar-link' do %>
     <li class="list-group-item <%if params[:controller] == 'dashboards'%>active<%end%>">
-        <i class="fa fa-home sidebar-icon"></i> Home
+        <i class="fa fa-dashboard sidebar-icon"></i> Dashboard
     </li>
     <%end%>
     <%= link_to projects_path, class: 'sidebar-link' do %>
     <li class="list-group-item <%if params[:controller] == 'projects'%>active<%end%>">
-        <i class="fa fa-folder sidebar-icon"></i> Projects
+        <i class="fa fa-folder-open sidebar-icon"></i> Projects
     </li>
     <%end%>
     <%= link_to tickets_path, class: 'sidebar-link' do %>
     <li class="list-group-item <%if params[:controller] == 'tickets'%>active<%end%>">
-        <i class="fa fa-folder sidebar-icon"></i> Tickets
+        <i class="fa fa-sticky-note sidebar-icon"></i> Tickets
+    </li>
+    <%end%>
+    <%= link_to boards_path, class: 'sidebar-link' do %>
+    <li class="list-group-item <%if params[:controller] == 'boards'%>active<%end%>">
+        <i class="fa fa-map sidebar-icon"></i> Boards
     </li>
     <%end%>
   </ul>

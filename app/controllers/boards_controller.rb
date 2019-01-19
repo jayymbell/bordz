@@ -10,11 +10,14 @@ class BoardsController < ApplicationController
   # GET /boards/1
   # GET /boards/1.json
   def show
+    @projects = @board.projects
+    @columns = @board.columns.order(:position)
   end
 
   # GET /boards/new
   def new
     @board = Board.new
+    
   end
 
   # GET /boards/1/edit
@@ -30,9 +33,11 @@ class BoardsController < ApplicationController
       if @board.save
         format.html { redirect_to @board, notice: 'Board was successfully created.' }
         format.json { render :show, status: :created, location: @board }
+        format.js {render :js => "window.location.reload();"}
       else
         format.html { render :new }
         format.json { render json: @board.errors, status: :unprocessable_entity }
+        format.js {render 'new'} 
       end
     end
   end
@@ -44,9 +49,11 @@ class BoardsController < ApplicationController
       if @board.update(board_params)
         format.html { redirect_to @board, notice: 'Board was successfully updated.' }
         format.json { render :show, status: :ok, location: @board }
+        format.js {render :js => "window.location.reload();"}
       else
         format.html { render :edit }
         format.json { render json: @board.errors, status: :unprocessable_entity }
+        format.js {render 'edit'} 
       end
     end
   end
@@ -58,6 +65,7 @@ class BoardsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to boards_url, notice: 'Board was successfully destroyed.' }
       format.json { head :no_content }
+      format.js {render :js => "window.location.reload();"}
     end
   end
 
@@ -69,6 +77,6 @@ class BoardsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def board_params
-      params.require(:board).permit(:name, :description)
+      params.require(:board).permit(:name, :description, project_ids: [])
     end
 end

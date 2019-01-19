@@ -1,14 +1,41 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col-sm-12">
+  <h3 style="display: inline-block;"><%= @board.name %></h3>
+    <div class="actions float-right">
+    <%= link_to 'Back', boards_path, class: 'btn btn-link btn-sm' %>
+      <%= link_to 'Edit', edit_board_path(@board), class: 'btn btn-link btn-sm', remote: true %>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-12">
+    <div class="field">
 
-<p>
-  <strong>Name:</strong>
-  <%= @board.name %>
-</p>
+    </div>
+  </div>
+</div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @board.description %>
-</p>
+<div class="row">
+  <div class="col-sm-12">
+    <div class="field">
+      <%= @board.description %>
+    </div>
+  </div>
+</div>
 
-<%= link_to 'Edit', edit_board_path(@board) %> |
-<%= link_to 'Back', boards_path %>
+<div class="row">
+  <div class="col-sm-12">
+    <div class="field">
+      <%= render 'projects'%>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <div class="field">
+      <%= render 'columns'%>
+    </div>
+  </div>
+</div>
+

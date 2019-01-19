@@ -1,0 +1,20 @@
+<div class="row">
+<div class="col-sm-12">
+<h5 style="display:inline-block;">Columns</h5>
+<%= link_to 'New Column', new_board_column_path(board: @board.id), class: 'btn btn-success btn-sm float-right', remote: true %>
+    <ul class="list-group" style="margin-top: 20px;">
+    <% @columns.each do |column| %>
+        <li class="list-group-item">
+        <%= link_to column.name, edit_board_column_path(column), remote: true  %>
+        <%= link_to column, method: :delete, data: { confirm: 'Are you sure?', style: "float: right;" } do %>
+          <i class="fa fa-trash text-danger float-right"></i>
+        <%end%>
+        </li>
+    <%end%>
+    </ul>
+
+
+
+<br>
+</div>
+</div>

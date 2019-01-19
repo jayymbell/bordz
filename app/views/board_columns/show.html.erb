@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Board:</strong>
+  <%= @board_column.board %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @board_column.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @board_column.description %>
+</p>
+
+<p>
+  <strong>Position:</strong>
+  <%= @board_column.position %>
+</p>
+
+<%= link_to 'Edit', edit_board_column_path(@board_column) %> |
+<%= link_to 'Back', board_columns_path %>

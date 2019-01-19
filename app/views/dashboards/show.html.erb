@@ -1,2 +1,21 @@
-<%= render 'assigned_tickets'%>
-<%= render 'reported_tickets'%>
+<div class="row" style="margin-top: 20px;">
+  <div class="col-sm-12">
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link active" id="assigned_tickets-tab" data-toggle="tab" href="#assigned_tickets" role="tab" aria-controls="assigned_tickets" aria-selected="true">Assigned Tickets</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="reported_tickets-tab" data-toggle="tab" href="#reported_tickets" role="tab" aria-controls="reported_tickets" aria-selected="true">Reported Tickets</a>
+      </li>
+    </ul>
+
+    <div class="tab-content">
+      <div class="tab-pane active" id="assigned_tickets" role="tabpanel" aria-labelledby="assigned_tickets-tab">
+        <%= render 'assigned_tickets'%>
+      </div>
+      <div class="tab-pane" id="reported_tickets" role="reported_tickets" aria-labelledby="reported_tickets-tab">
+        <%= render 'reported_tickets'%>
+      </div>
+    </div>
+  </div>
+</div>

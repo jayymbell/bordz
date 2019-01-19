@@ -1,0 +1,9 @@
+$('#dialog h3').html("Edit Column");
+
+$('.modal-body').html('<%= j render("form", board_column: @board_column ) %>');
+
+$('#dialog').modal("show");
+
+$('#dialog').on('shown.bs.modal', function () {
+$('.first_input').focus()
+})

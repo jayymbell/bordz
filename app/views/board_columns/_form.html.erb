@@ -1,0 +1,29 @@
+<%= form_with(model: board_column, local: true) do |form| %>
+    <%= render 'layouts/error_messages', object: form.object %>
+  <div class="row">
+  <div class="col-sm-12">
+    <div class="actions float-right">
+      <%= form.submit 'Submit', class: 'btn btn-link btn-sm' %>
+    </div>
+  </div>
+</div>
+
+  
+    
+    <%= form.hidden_field :board_id, id: :board_column_board_id %>
+
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :board_column_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description, id: :board_column_description %>
+  </div>
+
+  
+    <%= form.hidden_field :position, id: :board_column_position %>
+
+<% end %>

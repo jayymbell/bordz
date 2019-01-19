@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Board Columns</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Board</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Position</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @board_columns.each do |board_column| %>
+      <tr>
+        <td><%= board_column.board %></td>
+        <td><%= board_column.name %></td>
+        <td><%= board_column.description %></td>
+        <td><%= board_column.position %></td>
+        <td><%= link_to 'Show', board_column %></td>
+        <td><%= link_to 'Edit', edit_board_column_path(board_column) %></td>
+        <td><%= link_to 'Destroy', board_column, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Board Column', new_board_column_path %>
