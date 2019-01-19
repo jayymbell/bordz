@@ -18,6 +18,11 @@
       <br/>
       <%= yield %>
     </div>
+
+<% if Rails.env.development?%>
+    <br/>
+    <%= debug(params)%>
     <%= render '/layouts/modal' %>
+    <%end%>
   </body>
 </html>
