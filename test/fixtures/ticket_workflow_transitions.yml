@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ticket: one
+  workflow_transition: one
+  created_by: 1
+
+two:
+  ticket: two
+  workflow_transition: two
+  created_by: 1

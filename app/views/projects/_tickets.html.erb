@@ -11,6 +11,7 @@
           <th>Subject</th>
           <th>Assigned to</th>
           <th>Reported by</th>
+          <th>State</th>
           <th></th>
         </tr>
       </thead>
@@ -28,6 +29,7 @@
             <%end%>
             </td>
             <td><%= ticket.reporter.full_name %></td>
+            <td><%= ticket.state.name %></td>
             <td>
               <%= link_to ticket, method: :delete, data: { confirm: 'Are you sure?', remote: true } do %>
                 <i class="fa fa-trash text-danger float-right"></i>

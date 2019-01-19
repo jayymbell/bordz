@@ -21,7 +21,7 @@
 
     <div class="field">
       <%= form.label :workflow %>
-      <%= form.collection_select(:workflow, @workflows, :id, :name, :include_blank => 'None')%>
+      <%= form.collection_select(:workflow_id, @workflows, :id, :name, :include_blank => 'None')%>
     </div>
   </div>
 </div>

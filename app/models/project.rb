@@ -4,5 +4,6 @@ class Project < ApplicationRecord
 
     belongs_to :workflow
 
-    validates :name, uniqueness: {case_sensitive: false}
+    validates :name, presence: true, uniqueness: {case_sensitive: false}
+    validates :workflow, presence: true
 end

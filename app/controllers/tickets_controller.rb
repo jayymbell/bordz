@@ -17,6 +17,8 @@ class TicketsController < ApplicationController
     @ticket = Ticket.new
     @ticket.reported_by = current_user.id
     @ticket.project_id = params[:project]
+    project = Project.find(@ticket.project_id)
+    @ticket.workflow_id = project.workflow_id
   end
 
   # GET /tickets/1/edit
@@ -32,10 +34,11 @@ class TicketsController < ApplicationController
       if @ticket.save
         users = User.all.joins(:project_roles => :notifications).where("project_roles.project_id = ? AND notifications.id = ?", @ticket.project_id, 1)
         users.each do |user|
-          if ticket.reporter != user
+          if @ticket.reporter != user
           TicketMailer.new_ticket(@ticket, user).deliver_now
           end
         end
+        TicketWorkflowState.create(ticket_id: @ticket.id, workflow_state_id:@ticket.project.workflow.start_state, created_by:current_user.id)
         format.html { redirect_to @ticket, notice: 'Ticket was successfully created.' }
         format.json { render :show, status: :created, location: @ticket }
         format.js {render :js => "window.location.reload();"}
@@ -51,7 +54,18 @@ class TicketsController < ApplicationController
   # PATCH/PUT /tickets/1.json
   def update
     respond_to do |format|
-      if @ticket.update(ticket_params)
+      if !ticket_params[:transition_ticket].nil?
+        puts "DEBUG"
+        puts ticket_params[:transition_ticket].inspect
+        transition = WorkflowTransition.find(ticket_params[:transition_ticket])
+        if !transition.nil?
+          TicketWorkflowTransition.create(ticket_id: @ticket.id, workflow_transition_id:transition.id, created_by:current_user.id)
+          TicketWorkflowState.create(ticket_id: @ticket.id, workflow_state_id:transition.end_state, created_by:current_user.id)
+          format.js {render :js => "window.location.href='#{ticket_path(@ticket)}'"}
+        else
+          format.js {render 'edit'} 
+        end
+      elsif @ticket.update(ticket_params)
         format.html { redirect_to @ticket, notice: 'Ticket was successfully updated.' }
         format.json { render :show, status: :ok, location: @ticket }
         format.js {render :js => "window.location.href='#{ticket_path(@ticket)}'"} 
@@ -82,6 +96,6 @@ class TicketsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ticket_params
-      params.require(:ticket).permit(:assigned_to, :reported_by, :subject, :description, :project_id)
+      params.require(:ticket).permit(:assigned_to, :reported_by, :subject, :description, :project_id, :workflow_id, :transition_ticket)
     end
 end

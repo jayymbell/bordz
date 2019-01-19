@@ -21,6 +21,7 @@ class WorkflowTransitionsController < ApplicationController
 
   # GET /workflow_transitions/1/edit
   def edit
+    @workflow_states = WorkflowState.where(workflow_id: @workflow_transition.workflow_id)
   end
 
   # POST /workflow_transitions

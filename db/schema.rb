@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190118224715) do
+ActiveRecord::Schema.define(version: 20190119001610) do
 
   create_table "groups", force: :cascade do |t|
     t.string "name"
@@ -75,6 +75,26 @@ ActiveRecord::Schema.define(version: 20190118224715) do
     t.index ["workflow_id"], name: "index_projects_on_workflow_id"
   end
 
+  create_table "ticket_workflow_states", force: :cascade do |t|
+    t.integer "ticket_id"
+    t.integer "workflow_state_id"
+    t.integer "created_by"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ticket_id"], name: "index_ticket_workflow_states_on_ticket_id"
+    t.index ["workflow_state_id"], name: "index_ticket_workflow_states_on_workflow_state_id"
+  end
+
+  create_table "ticket_workflow_transitions", force: :cascade do |t|
+    t.integer "ticket_id"
+    t.integer "workflow_transition_id"
+    t.integer "created_by"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ticket_id"], name: "index_ticket_workflow_transitions_on_ticket_id"
+    t.index ["workflow_transition_id"], name: "index_ticket_workflow_transitions_on_workflow_transition_id"
+  end
+
   create_table "tickets", force: :cascade do |t|
     t.integer "assigned_to"
     t.integer "reported_by"
@@ -83,7 +103,9 @@ ActiveRecord::Schema.define(version: 20190118224715) do
     t.integer "project_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "workflow_id"
     t.index ["project_id"], name: "index_tickets_on_project_id"
+    t.index ["workflow_id"], name: "index_tickets_on_workflow_id"
   end
 
   create_table "users", force: :cascade do |t|

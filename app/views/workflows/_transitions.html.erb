@@ -17,7 +17,7 @@
   <tbody>
     <% @workflow.transitions.each do |transition| %>
       <tr>
-        <td><%= link_to transition.id, workflow_transition_path(transition) %></td>
+        <td><%= link_to transition.id, edit_workflow_transition_path(transition), remote: true %></td>
         <td><%= transition.name %></td>
         <td><%= transition.starting_state.name %></td>
         <td><%= transition.ending_state.name %></td>
