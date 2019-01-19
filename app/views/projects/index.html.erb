@@ -6,9 +6,11 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>Id</th>
       <th>Name</th>
       <th>Workflow</th>
+      <th>Users</th>
+      <th>Tickets</th>
+      <th>Last Ticket</th>
       <th></th>
     </tr>
   </thead>
@@ -16,9 +18,11 @@
   <tbody>
     <% @projects.each do |project| %>
       <tr>
-        <td><%= link_to project.id, project_path(project) %></td>
-        <td><%= project.name %></td>
+        <td><%= link_to project.name, project_path(project) %></td>
         <td><%= project.workflow.name %></td>
+        <td><%= project.users.count %></td>
+        <td><%= project.tickets.count %></td>
+        <td><%= project.tickets.order(:created_at).last.created_at %></td>
         <td>
         <%= link_to project, method: :delete, data: { confirm: 'Are you sure?' } do %>
           <i class="fa fa-trash text-danger float-right"></i>

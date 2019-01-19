@@ -1,0 +1,41 @@
+<div class="row">
+<div class="col-sm-12">
+  <h5>Assigned Tickets</h5>
+
+    <table class="table table-striped" style="margin-top:20px;">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Subject</th>
+          <th>Assigned to</th>
+          <th>Reported by</th>
+          <th>State</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @assigned_tickets.each do |ticket| %>
+          <tr>
+            <td><%= link_to ticket.id, ticket_path(ticket) %></td>
+            <td><%= ticket.subject %></td>
+            <td>
+            <%if ticket.assignee.nil?%>
+              Unassigned
+            <%else%>
+              <%= ticket.assignee.full_name %>
+            <%end%>
+            </td>
+            <td><%= ticket.reporter.full_name %></td>
+            <td><%= ticket.state.name %></td>
+            <td>
+              <%= link_to ticket, method: :delete, data: { confirm: 'Are you sure?', remote: true } do %>
+                <i class="fa fa-trash text-danger float-right"></i>
+              <%end%>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

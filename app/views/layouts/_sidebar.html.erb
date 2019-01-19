@@ -2,13 +2,18 @@
 <div class="card sidebar-nav">
   <ul class="list-group list-group-flush">
   <%= link_to root_path, class: 'sidebar-link' do %>
-    <li class="list-group-item">
+    <li class="list-group-item <%if params[:controller] == 'dashboards'%>active<%end%>">
         <i class="fa fa-home sidebar-icon"></i> Home
     </li>
     <%end%>
     <%= link_to projects_path, class: 'sidebar-link' do %>
-    <li class="list-group-item">
+    <li class="list-group-item <%if params[:controller] == 'projects'%>active<%end%>">
         <i class="fa fa-folder sidebar-icon"></i> Projects
+    </li>
+    <%end%>
+    <%= link_to tickets_path, class: 'sidebar-link' do %>
+    <li class="list-group-item <%if params[:controller] == 'tickets'%>active<%end%>">
+        <i class="fa fa-folder sidebar-icon"></i> Tickets
     </li>
     <%end%>
   </ul>
