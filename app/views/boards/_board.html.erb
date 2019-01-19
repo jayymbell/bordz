@@ -1,5 +1,5 @@
 <%tickets = Ticket.joins(:states => :workflow_state).where("tickets.project_id IN (?)", @board.projects.pluck(:id)).uniq%>
-<div class="row" style="margin-top: 10px;">
+<div class="row" style="margin-top: 10px; height: 500px;">
     <% @board.columns.order(:position).each do |column|%>
         <div class="col-sm-<%=(12/@board.columns.count).round%> border border-dark bg-light">
             <%= column.name%>
