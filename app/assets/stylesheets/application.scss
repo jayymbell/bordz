@@ -58,7 +58,9 @@
 input[type=text]{
     @extend .form-control;
   }
-
+input[type=number]{
+    @extend .form-control;
+  }
 input[type=password]{
     @extend .form-control;
 }

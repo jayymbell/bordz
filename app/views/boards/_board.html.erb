@@ -1,0 +1,27 @@
+<%tickets = Ticket.joins(:states => :workflow_state).where("tickets.project_id IN (?)", @board.projects.pluck(:id)).uniq%>
+<div class="row" style="margin-top: 10px;">
+    <% @board.columns.order(:position).each do |column|%>
+        <div class="col-sm-<%=(12/@board.columns.count).round%> border border-dark bg-light">
+            <%= column.name%>
+            <br/>
+            <%tickets.each do |ticket|%>
+                <% if column.states.include?(ticket.state)%>
+                    <div class="card" style=" margin-top: 10px; margin-bottom: 10px;">
+                        <div class="card-body text-center" style="padding: 2px;">
+                            <%= link_to "Ticket ##{ticket.id}", ticket_path(ticket)%>
+                            <%if ticket.points.nil?%>
+<span class="badge badge-primary" style="display: inline-block;
+    vertical-align: top; margin-left: 10px;">0</span>
+                            
+                            <%else%>
+                            <span class="badge badge-primary" style="display: inline-block;
+    vertical-align: top; margin-left: 10px;"><%=ticket.points%></span>
+                            <%end%>
+                        </div>
+                    </div>
+                <%end%>
+            <%end%>
+
+        </div>
+    <%end%>
+</div>

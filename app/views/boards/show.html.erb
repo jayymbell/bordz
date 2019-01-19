@@ -23,18 +23,32 @@
   </div>
 </div>
 
-<div class="row">
+<div class="row" style="margin-top: 20px;">
   <div class="col-sm-12">
-    <div class="field">
-      <%= render 'projects'%>
-    </div>
-  </div>
-</div>
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link active" id="board-tab" data-toggle="tab" href="#board" role="tab" aria-controls="board" aria-selected="true">Board</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="sprints-tab" data-toggle="tab" href="#sprints" role="tab" aria-controls="sprints" aria-selected="true">Sprints</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="settings-tab" data-toggle="tab" href="#settings" role="tab" aria-controls="settings" aria-selected="true">Settings</a>
+      </li>
+    </ul>
 
-<div class="row">
-  <div class="col-sm-12">
-    <div class="field">
-      <%= render 'columns'%>
+    <div class="tab-content">
+      <div class="tab-pane active" id="board" role="board" aria-labelledby="board-tab">
+        <%= render 'board'%>
+      </div>
+      <div class="tab-pane" id="sprints" role="tabpanel" aria-labelledby="sprints-tab">
+        <%= render 'sprints'%>
+        
+      </div>
+      <div class="tab-pane" id="settings" role="tabpanel" aria-labelledby="settings-tab">
+        <%= render 'settings'%>
+        
+      </div>
     </div>
   </div>
 </div>

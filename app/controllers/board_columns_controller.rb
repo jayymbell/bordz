@@ -19,6 +19,7 @@ class BoardColumnsController < ApplicationController
   # GET /board_columns/1
   # GET /board_columns/1.json
   def show
+    
   end
 
   # GET /board_columns/new
@@ -27,10 +28,13 @@ class BoardColumnsController < ApplicationController
     board = Board.find(params[:board])
     @board_column.board_id = board.id
     @board_column.position = board.columns.maximum('position').to_i + 1
+    @states = WorkflowState.where("workflow_id In (?)", board.projects.pluck(:workflow_id)).select("workflow_states.id, workflow_states.name")
   end
 
   # GET /board_columns/1/edit
   def edit
+    board = Board.find(@board_column.board_id)
+    @states = WorkflowState.where("workflow_id In (?)", board.projects.pluck(:workflow_id)).select("workflow_states.id, workflow_states.name")
   end
 
   # POST /board_columns
@@ -86,6 +90,6 @@ class BoardColumnsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def board_column_params
-      params.require(:board_column).permit(:board_id, :name, :description, :position)
+      params.require(:board_column).permit(:board_id, :name, :description, :position, state_ids:[])
     end
 end
