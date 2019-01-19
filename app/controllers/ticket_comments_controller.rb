@@ -1,4 +1,5 @@
 class TicketCommentsController < ApplicationController
+  before_action :logged_in_user
   before_action :set_ticket_comment, only: [:show, :edit, :update, :destroy]
 
   # GET /ticket_comments

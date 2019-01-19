@@ -1,4 +1,5 @@
 class WorkflowTransitionsController < ApplicationController
+  before_action :logged_in_user
   before_action :set_workflow_transition, only: [:show, :edit, :update, :destroy]
 
   # GET /workflow_transitions

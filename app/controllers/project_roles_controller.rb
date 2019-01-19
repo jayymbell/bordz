@@ -1,4 +1,5 @@
 class ProjectRolesController < ApplicationController
+  before_action :logged_in_user
   before_action :set_project_role, only: [:show, :edit, :update, :destroy]
 
   # GET /project_roles

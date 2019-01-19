@@ -1,4 +1,5 @@
 class TicketsController < ApplicationController
+  before_action :logged_in_user
   before_action :set_ticket, only: [:show, :edit, :update, :destroy]
 
   # GET /tickets
@@ -64,6 +65,13 @@ class TicketsController < ApplicationController
         if !transition.nil?
           TicketWorkflowTransition.create(ticket_id: @ticket.id, workflow_transition_id:transition.id, created_by:current_user.id)
           TicketWorkflowState.create(ticket_id: @ticket.id, workflow_state_id:transition.end_state, created_by:current_user.id)
+          users = User.all.joins(:project_roles => :notifications).where("project_roles.project_id = ? AND notifications.id = ?", @ticket.project_id, 2)
+          users.each do |user|
+            if current_user != user
+              TicketMailer.state_change(@ticket, user).deliver_now  
+            end          
+          end
+
           format.js {render :js => "window.location.href='#{ticket_path(@ticket)}'"}
         else
           format.js {render 'edit'} 

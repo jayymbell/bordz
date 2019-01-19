@@ -13,8 +13,6 @@
   </div>
   <div class="col-sm-3">
     <span style="float: right;"> 
-    <%= @ticket.created_at  %>
-    <br/>
     
 
     <% @ticket.state.transitions.each do |transition|%>
@@ -52,6 +50,13 @@
       <strong>Status</strong>
       <br/>
       <%= @ticket.state.name%>
+    </div>
+  </div>
+  <div class="col-sm-3">
+    <div class="field">
+      <strong>Created At</strong>
+      <br/>
+      <%= @ticket.created_at%>
     </div>
   </div>
 </div>

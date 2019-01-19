@@ -9,4 +9,10 @@ class TicketMailer < ApplicationMailer\
         @user = user
         mail to: user.email, subject: "[Bordz] Ticket ##{ticket.id} Created - #{ticket.project.name} Project"
     end
+
+    def state_change(ticket, user)
+        @ticket = ticket
+        @user = user
+        mail to: user.email, subject: "[Bordz] Ticket ##{ticket.id} Updated - '#{@ticket.state.name}' Status - #{ticket.project.name} Project"
+    end
 end
