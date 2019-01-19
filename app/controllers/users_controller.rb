@@ -11,8 +11,9 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @projects = Project.joins(:roles => :users).where("users.id = ?", current_user.id)
+    
     @project_roles = ProjectRole.joins(:users).where("users.id = ?", current_user.id)
+    @projects = Project.where("id In (?)", @project_roles.pluck(:project_id))
 
     puts @projects
     puts @project_roles
@@ -88,6 +89,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
+      params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, notification_ids: [])
     end
 end

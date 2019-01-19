@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190119015123) do
+ActiveRecord::Schema.define(version: 20190119023547) do
 
   create_table "groups", force: :cascade do |t|
     t.string "name"
@@ -42,6 +42,12 @@ ActiveRecord::Schema.define(version: 20190119015123) do
     t.integer "notification_id", null: false
     t.integer "project_role_id", null: false
     t.index ["project_role_id", "notification_id"], name: "notifications_project_roles_index"
+  end
+
+  create_table "notifications_users", id: false, force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "notification_id", null: false
+    t.index [nil, nil], name: "users_notifications_index"
   end
 
   create_table "permissions", force: :cascade do |t|

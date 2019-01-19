@@ -36,9 +36,10 @@ class TicketsController < ApplicationController
 
     respond_to do |format|
       if @ticket.save
-        users = User.all.joins(:project_roles => :notifications).where("project_roles.project_id = ? AND notifications.id = ?", @ticket.project_id, 1)
+        notification = Notification.find(1)
+        users = User.all.joins(:project_roles => :notifications).where("project_roles.project_id = ? AND notifications.id = ?", @ticket.project_id, notification.id)
         users.each do |user|
-          if @ticket.reporter != user
+          if @ticket.reporter != user && user.notifications.where("notifications.id = ?", notification.id)
           TicketMailer.new_ticket(@ticket, user).deliver_now
           end
         end
@@ -62,11 +63,12 @@ class TicketsController < ApplicationController
         puts ticket_params[:transition_ticket].inspect
         transition = WorkflowTransition.find(ticket_params[:transition_ticket])
         if !transition.nil?
+          notification = Notification.find(2)
           TicketWorkflowTransition.create(ticket_id: @ticket.id, workflow_transition_id:transition.id, created_by:current_user.id)
           TicketWorkflowState.create(ticket_id: @ticket.id, workflow_state_id:transition.end_state, created_by:current_user.id)
-          users = User.all.joins(:project_roles => :notifications).where("project_roles.project_id = ? AND notifications.id = ?", @ticket.project_id, 2)
+          users = User.all.joins(:project_roles => :notifications).where("project_roles.project_id = ? AND notifications.id = ?", @ticket.project_id, notification.id)
           users.each do |user|
-            if current_user != user
+            if current_user != user && user.notifications.where("notifications.id = ?", notification.id)
               TicketMailer.state_change(@ticket, user).deliver_now  
             end          
           end
