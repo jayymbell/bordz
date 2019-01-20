@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  resources :board_sprints
+  resources :board_sprints do
+  collection do
+    patch :add_ticket
+    patch :remove_ticket
+  end
+end
   resources :board_columns do
     collection do
       patch :sort

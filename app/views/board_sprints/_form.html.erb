@@ -1,4 +1,4 @@
-<%= form_with(model: board_sprint, local: true) do |form| %>
+<%= form_with(model: board_sprint, remote: true) do |form| %>
   <%= render 'layouts/error_messages', object: form.object %>
 
   <div class="row">

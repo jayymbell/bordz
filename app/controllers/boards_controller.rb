@@ -12,8 +12,13 @@ class BoardsController < ApplicationController
   def show
     @projects = @board.projects
     @columns = @board.columns.order(:position)
-    @sprints = @board.sprints
+    @sprints = @board.sprints.where(is_active: true)
     @backlog_tickets = Ticket.all.where("project_id In (?)", @board.projects.pluck(:id))
+    if @board.sprints.joins(:tickets).pluck("tickets.id").length > 0
+     @backlog_tickets = @backlog_tickets.where("id not in (?)", @board.sprints.joins(:tickets).pluck("tickets.id"))
+    end
+    @tickets = Ticket.where("project_id IN (?)", @board.projects.pluck(:id))
+    @tickets = @tickets.joins(:sprints).where("board_sprints_tickets.board_sprint_id IN (?)", @sprints.where("is_complete IS NOT ?", true).pluck(:id))
   end
 
   # GET /boards/new

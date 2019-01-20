@@ -1,44 +1,50 @@
 <h5 style="display: inline-block;">Backlog</h5>
 <div class="row">
   <div class="col-sm-12">
-    <table class="table table-striped" style="margin-top:20px;">
-      <thead>
-        <tr>
-          <th>Id</th>
-          <th>Subject</th>
-          <th>State</th>
-          <th>Points</th>
-          <th>Assigned to</th>
-          <th>Reported by</th>
-          <th>Created at</th>
-        </tr>
-      </thead>
-
-      <tbody>
+  <ul class="list-group" id="backlog" data-url="<%= remove_ticket_board_sprints_path %>">
+  <li  class="list-group-item  bg-light">
+    <div class="row h6">
+              <div class="col-sm-1">Id</div>
+            
+              <div class="col-sm-4">Subject</div>
+              <div class="col-sm-2">State</div>
+              <div class="col-sm-1">
+                Points
+              </div>
+              <div class="col-sm-2">
+                Assignee
+              </div>
+              <div class="col-sm-2">
+                Reporter
+              </div>
+              </div>
+              </li>
+  
         <% @backlog_tickets.each do |ticket| %>
-          <tr>
-            <td><%= link_to ticket.id, ticket_path(ticket) %></td>
-            <td><%= ticket.subject %></td>
-            <td><%= ticket.state.name %></td>
-            <td>
-            <%if ticket.points.nil?%>
-            0
-            <%else%>
-            <%= ticket.points %>
-            <%end%>
-            </td>
-            <td>
-            <%if ticket.assignee.nil?%>
-              Unassigned
-            <%else%>
-              <%= ticket.assignee.full_name %>
-            <%end%>
-            </td>
-            <td><%= ticket.reporter.full_name %></td>
-            <td><%= ticket.reporter.created_at %></td>
-          </tr>
+          <li class="list-group-item ticket" id="<%= dom_id(ticket)%>">
+            <div class="row">
+              <div class="col-sm-1"><%= link_to ticket.id, ticket_path(ticket) %></div>
+            
+              <div class="col-sm-4"><%= ticket.subject %></div>
+              <div class="col-sm-2"><%= ticket.state.name %></div>
+              <div class="col-sm-1">
+                <%if ticket.points.nil?%>
+                0
+                <%else%>
+                <%= ticket.points %>
+                <%end%>
+              </div>
+              <div class="col-sm-2">
+                <%if ticket.assignee.nil?%>
+                  Unassigned
+                <%else%>
+                  <%= ticket.assignee.full_name %>
+                <%end%>
+              </div>
+              <div class="col-sm-2"><%= ticket.reporter.full_name %></div>
+              </div>
+          </li>
         <% end %>
-      </tbody>
-    </table>
+        </ul>
   </div>
 </div>

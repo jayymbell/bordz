@@ -1,6 +1,40 @@
 class BoardSprintsController < ApplicationController
   before_action :set_board_sprint, only: [:show, :edit, :update, :destroy]
 
+  def add_ticket
+    if !params[:ticket].nil? && !params[:board_sprint].nil?
+      sprint = BoardSprint.find_by(id: params[:board_sprint])
+      ticket = Ticket.find(params[:ticket])
+      
+      if !sprint.nil? && !ticket.nil?
+        ticket.sprints.each do |s|
+          if s.board_id = sprint.board_id
+            ticket.sprints.delete(s)
+          end
+        end
+        sprint.tickets << ticket
+      end
+    end
+
+    head :ok
+  end
+
+  def remove_ticket
+    if !params[:ticket].nil? && !params[:board].nil?
+      board = Board.find_by(id: params[:board])
+      ticket = Ticket.find(params[:ticket])
+      
+      if !board.nil? && !ticket.nil?
+        board.sprints.each do |sprint|
+          ticket.sprints.delete(sprint)
+        end
+        
+      end
+    end
+
+    head :ok
+  end
+
   # GET /board_sprints
   # GET /board_sprints.json
   def index
@@ -28,8 +62,12 @@ class BoardSprintsController < ApplicationController
   # POST /board_sprints
   # POST /board_sprints.json
   def create
-    board_sprint_params[:starts_on] = Date.strptime(board_sprint_params[:starts_on], "%m/%d/%Y")
-    board_sprint_params[:ends_on] = Date.strptime(board_sprint_params[:ends_on], "%m/%d/%Y")
+    if !params[:board_sprint][:starts_on].nil? && params[:board_sprint][:starts_on] != ""
+      params[:board_sprint][:starts_on] = Date.strptime(board_sprint_params[:starts_on], "%m/%d/%Y")
+    end
+    if !params[:board_sprint][:ends_on].nil? && params[:board_sprint][:ends_on] != ""
+      params[:board_sprint][:ends_on] = Date.strptime(board_sprint_params[:ends_on], "%m/%d/%Y")
+    end
     @board_sprint = BoardSprint.new(board_sprint_params)
 
     respond_to do |format|
@@ -48,12 +86,13 @@ class BoardSprintsController < ApplicationController
   # PATCH/PUT /board_sprints/1
   # PATCH/PUT /board_sprints/1.json
   def update
-    puts board_sprint_params[:ends_on].inspect
-    puts = board_sprint_params[:ends_on]
-    params[:board_sprint][:starts_on] = Date.strptime(board_sprint_params[:starts_on], "%m/%d/%Y")
-    params[:board_sprint][:ends_on] = Date.strptime(board_sprint_params[:ends_on], "%m/%d/%Y")
-    puts = board_sprint_params[:start_on]
-    puts = board_sprint_params[:ends_on]
+
+    if !params[:board_sprint][:starts_on].nil? && params[:board_sprint][:starts_on] != ""
+      params[:board_sprint][:starts_on] = Date.strptime(board_sprint_params[:starts_on], "%m/%d/%Y")
+    end
+    if !params[:board_sprint][:ends_on].nil? && params[:board_sprint][:ends_on] != ""
+      params[:board_sprint][:ends_on] = Date.strptime(board_sprint_params[:ends_on], "%m/%d/%Y")
+    end
     respond_to do |format|
       if @board_sprint.update(board_sprint_params)
         format.html { redirect_to @board_sprint, notice: 'Board sprint was successfully updated.' }
@@ -85,6 +124,6 @@ class BoardSprintsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def board_sprint_params
-      params.require(:board_sprint).permit(:board_id, :starts_on, :ends_on, :name)
+      params.require(:board_sprint).permit(:board_id, :starts_on, :ends_on, :name, :is_active, :is_complete)
     end
 end

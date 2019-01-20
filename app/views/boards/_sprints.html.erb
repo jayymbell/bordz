@@ -2,44 +2,142 @@
 <div class="col-sm-12">
 <h5 style="display:inline-block;">Sprints</h5>
 <%= link_to 'New Sprint', new_board_sprint_path(board: @board.id), class: 'btn btn-success btn-sm float-right', remote: true %>
+<br/>
     <% @sprints.each do |sprint| %>
-      <table class="table table-striped" style="margin-top: 10px;">
-        <thead>
-          <tr>
-            <th colspan="7">Sprint <%= sprint.name%> [<%= sprint.starts_on.strftime('%m/%d/%y')%> - <%= sprint.ends_on.strftime('%m/%d/%y')%>]</th>
-          </tr>
-        </thead>
-
-        <tbody>
-        <%sprint.tickets.each do |ticket|%>
-          <tr>
-            <td><%= link_to ticket.id, ticket_path(ticket) %></td>
-            <td><%= ticket.subject %></td>
-            <td><%= ticket.state.name %></td>
-            <td>
-            <%if ticket.points.nil?%>
-            0
-            <%else%>
-            <%= ticket.points %>
+    <% if !sprint.is_complete%>
+    <br/>
+    <div class="row">
+    <div class="col-sm-12">
+        <%= link_to "Sprint #{sprint.name}", edit_board_sprint_path(sprint), remote: true %> [<%= sprint.starts_on.strftime('%m/%d/%y')%> - <%= sprint.ends_on.strftime('%m/%d/%y')%>]
+        <span style="float: right;">
+        <% if !sprint.is_active%>
+          <%= form_with(model: sprint, remote: true) do |form| %>
+            <%= form.hidden_field :is_active, value: true%>
+            <% button_disabled = true%>
+            <%if sprint.tickets.any?%>
+            <% button_disabled = false%>
             <%end%>
-            </td>
-            <td>
-            <%if ticket.assignee.nil?%>
-              Unassigned
-            <%else%>
-              <%= ticket.assignee.full_name %>
+            <%= form.button  class: "btn btn-link" , disabled: button_disabled do %>
+              Activate Sprint
             <%end%>
-            </td>
-            <td><%= ticket.reporter.full_name %></td>
-            <td><%= ticket.reporter.created_at %></td>
-          </tr>
           <%end%>
-          </tbody>
-        </table>
+        <%elsif !sprint.is_complete%>
+          <%= form_with(model: sprint, remote: true) do |form| %>
+            <%= form.hidden_field :is_complete, value: true%>
+            <%= form.button  class: "btn btn-link" do %>
+              Complete Sprint
+            <%end%>
+          <%end%>
+        <%else%>
+        <span class="text-success">Complete</span>
+        <%end%>
+        </span>
+</div>
+</div>
+        <ul id="<%=dom_id(sprint)%>" class="list-group sprint-list" style="margin-top: 20px;" data-url="<%= add_ticket_board_sprints_path %>">
+        <li  class="list-group-item  bg-light">
+    <div class="row h6">
+              <div class="col-sm-1">Id</div>
+            
+              <div class="col-sm-4">Subject</div>
+              <div class="col-sm-2">State</div>
+              <div class="col-sm-1">
+                Points
+              </div>
+              <div class="col-sm-2">
+                Assignee
+              </div>
+              <div class="col-sm-2">
+                Reporter
+              </div>
+              </div>
+              </li>
+  
+        <%sprint.tickets.each do |ticket|%>
+          <li id="<%= dom_id(ticket)%>" class="list-group-item ticket">
+            <div class="row">
+              <div class="col-sm-1"><%= link_to ticket.id, ticket_path(ticket) %></div>
+            
+              <div class="col-sm-4"><%= ticket.subject %></div>
+              <div class="col-sm-2"><%= ticket.state.name %></div>
+              <div class="col-sm-1">
+                <%if ticket.points.nil?%>
+                0
+                <%else%>
+                <%= ticket.points %>
+                <%end%>
+              </div>
+              <div class="col-sm-2">
+                <%if ticket.assignee.nil?%>
+                  Unassigned
+                <%else%>
+                  <%= ticket.assignee.full_name %>
+                <%end%>
+              </div>
+              <div class="col-sm-2"><%= ticket.reporter.full_name %></div>
+            </div>
+          </li>
+          <%end%>
+          </ul>
     <% end %>
+    <%end%>
 
 <br>
 </div>
 </div>
 
 <%= render 'backlog'%>
+
+<script>
+$( function() {
+    $( ".ticket" ).draggable(
+      {revert: true}
+    );
+    $( ".sprint-list" ).droppable({
+      drop: function( event, ui ) {
+        console.log(ui.draggable)
+        $.ajax({
+        url: $(this).data("url"),
+        type: "PATCH",
+        data: { ticket: $(ui.draggable).attr('id').split("_").pop(), board_sprint: $(this).attr('id').split("_").pop()},
+            beforeSend: function(xhr) {
+           xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
+},
+        success: function(){
+          
+        },
+        error: function(){
+          alert({ ticket: $(ui.draggable).attr('id').split("_").pop(), board_sprint: $(this).attr('id').split("_").pop()})
+        }
+        });
+
+        list_item = ui.draggable
+        list_item.attr('style','')
+        $(this).append(list_item);
+      }
+    });
+    $( "#backlog" ).droppable({
+      drop: function( event, ui ) {
+        console.log(ui.draggable)
+        $.ajax({
+        url: $(this).data("url"),
+        type: "PATCH",
+        data: { ticket: $(ui.draggable).attr('id').split("_").pop(), board: <%= @board.id %>},
+            beforeSend: function(xhr) {
+           xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
+},
+        success: function(){
+          
+        },
+        error: function(){
+          alert({ ticket: $(ui.draggable).attr('id').split("_").pop(), board_sprint: $(this).attr('id').split("_").pop()})
+        }
+        });
+
+        list_item = ui.draggable
+        list_item.attr('style','')
+        $(this).append(list_item);
+      }
+    });
+  } );
+</script>

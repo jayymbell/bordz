@@ -14,6 +14,8 @@
 //= require jquery
 //= require jquery-ui/widget
 //= require jquery-ui/sortable
+//= require jquery-ui/draggable
+//= require jquery-ui/droppable
 //= require popper
 //= require bootstrap-sprockets
 //= require bootstrap-datepicker
