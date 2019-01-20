@@ -15,6 +15,10 @@ class BoardSprintsController < ApplicationController
   # GET /board_sprints/new
   def new
     @board_sprint = BoardSprint.new
+    board = Board.find(params[:board])
+    if board
+      @board_sprint.board_id = board.id
+    end
   end
 
   # GET /board_sprints/1/edit
@@ -24,15 +28,19 @@ class BoardSprintsController < ApplicationController
   # POST /board_sprints
   # POST /board_sprints.json
   def create
+    board_sprint_params[:starts_on] = Date.strptime(board_sprint_params[:starts_on], "%m/%d/%Y")
+    board_sprint_params[:ends_on] = Date.strptime(board_sprint_params[:ends_on], "%m/%d/%Y")
     @board_sprint = BoardSprint.new(board_sprint_params)
 
     respond_to do |format|
       if @board_sprint.save
         format.html { redirect_to @board_sprint, notice: 'Board sprint was successfully created.' }
         format.json { render :show, status: :created, location: @board_sprint }
+        format.js {render :js => "window.location.reload();"}
       else
         format.html { render :new }
         format.json { render json: @board_sprint.errors, status: :unprocessable_entity }
+        format.js {render 'new'}
       end
     end
   end
@@ -40,13 +48,22 @@ class BoardSprintsController < ApplicationController
   # PATCH/PUT /board_sprints/1
   # PATCH/PUT /board_sprints/1.json
   def update
+    puts "=====  DEBUG ======"
+    puts board_sprint_params[:ends_on].inspect
+    puts = board_sprint_params[:ends_on]
+    params[:board_sprint][:starts_on] = Date.strptime(board_sprint_params[:starts_on], "%m/%d/%Y")
+    params[:board_sprint][:ends_on] = Date.strptime(board_sprint_params[:ends_on], "%m/%d/%Y")
+    puts = board_sprint_params[:start_on]
+    puts = board_sprint_params[:ends_on]
     respond_to do |format|
       if @board_sprint.update(board_sprint_params)
         format.html { redirect_to @board_sprint, notice: 'Board sprint was successfully updated.' }
         format.json { render :show, status: :ok, location: @board_sprint }
+        format.js {render :js => "window.location.reload();"}
       else
         format.html { render :edit }
         format.json { render json: @board_sprint.errors, status: :unprocessable_entity }
+        format.js {render 'edit'}
       end
     end
   end

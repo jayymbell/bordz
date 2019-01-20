@@ -16,6 +16,7 @@
 //= require jquery-ui/sortable
 //= require popper
 //= require bootstrap-sprockets
+//= require bootstrap-datepicker
 //= require_tree .
 
 $( document ).ready(function() {

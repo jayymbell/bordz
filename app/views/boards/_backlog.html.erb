@@ -1,0 +1,44 @@
+<h5 style="display: inline-block;">Backlog</h5>
+<div class="row">
+  <div class="col-sm-12">
+    <table class="table table-striped" style="margin-top:20px;">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Subject</th>
+          <th>State</th>
+          <th>Points</th>
+          <th>Assigned to</th>
+          <th>Reported by</th>
+          <th>Created at</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @backlog_tickets.each do |ticket| %>
+          <tr>
+            <td><%= link_to ticket.id, ticket_path(ticket) %></td>
+            <td><%= ticket.subject %></td>
+            <td><%= ticket.state.name %></td>
+            <td>
+            <%if ticket.points.nil?%>
+            0
+            <%else%>
+            <%= ticket.points %>
+            <%end%>
+            </td>
+            <td>
+            <%if ticket.assignee.nil?%>
+              Unassigned
+            <%else%>
+              <%= ticket.assignee.full_name %>
+            <%end%>
+            </td>
+            <td><%= ticket.reporter.full_name %></td>
+            <td><%= ticket.reporter.created_at %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -70,3 +70,5 @@ gem "figaro"
 gem 'jquery-ui-rails', '~> 5.0', '>= 5.0.5'
 gem 'acts_as_list'
 
+gem 'bootstrap-datepicker-rails'
+

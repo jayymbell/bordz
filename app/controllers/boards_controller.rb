@@ -12,6 +12,8 @@ class BoardsController < ApplicationController
   def show
     @projects = @board.projects
     @columns = @board.columns.order(:position)
+    @sprints = @board.sprints
+    @backlog_tickets = Ticket.all.where("project_id In (?)", @board.projects.pluck(:id))
   end
 
   # GET /boards/new

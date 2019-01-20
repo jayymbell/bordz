@@ -22,7 +22,7 @@
         <td><%= project.workflow.name %></td>
         <td><%= project.users.count %></td>
         <td><%= project.tickets.count %></td>
-        <td><%= project.tickets.order(:created_at).last.created_at %></td>
+        <td><%= project.tickets.order(:created_at).last.created_at unless !project.tickets.any? %></td>
         <td>
         <%= link_to project, method: :delete, data: { confirm: 'Are you sure?' } do %>
           <i class="fa fa-trash text-danger float-right"></i>

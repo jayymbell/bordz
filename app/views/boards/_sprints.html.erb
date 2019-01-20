@@ -1,0 +1,31 @@
+<div class="row" style="margin-top: 10px;">
+<div class="col-sm-12">
+<h5 style="display:inline-block;">Sprints</h5>
+<%= link_to 'New Sprint', new_board_sprint_path(board: @board.id), class: 'btn btn-success btn-sm float-right', remote: true %>
+    <% @sprints.each do |sprint| %>
+      <table class="table table-striped" style="margin-top: 10px;">
+        <thead>
+          <tr>
+            <th colspan="7">Sprint <%= sprint.name%> [<%= sprint.starts_on.strftime('%m/%d/%y')%> - <%= sprint.ends_on.strftime('%m/%d/%y')%>]</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          </tbody>
+        </table>
+    <% end %>
+
+<br>
+</div>
+</div>
+
+<%= render 'backlog'%>
