@@ -8,6 +8,8 @@ class Ticket < ApplicationRecord
 
   has_many :comments, :class_name => "TicketComment"
 
+  has_and_belongs_to_many :sprints, :class_namer => "BoardSprint"
+
   validates :reported_by, :project_id, :presence => true
 
   def state

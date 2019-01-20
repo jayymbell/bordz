@@ -48,7 +48,6 @@ class BoardSprintsController < ApplicationController
   # PATCH/PUT /board_sprints/1
   # PATCH/PUT /board_sprints/1.json
   def update
-    puts "=====  DEBUG ======"
     puts board_sprint_params[:ends_on].inspect
     puts = board_sprint_params[:ends_on]
     params[:board_sprint][:starts_on] = Date.strptime(board_sprint_params[:starts_on], "%m/%d/%Y")
